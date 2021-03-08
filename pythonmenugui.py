@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 import subprocess
 import requests
 import os
-
+import shutil
 
 diretorioarcom = "c:\\arcom"
 
@@ -46,15 +46,18 @@ def save_response_content(response, destination):
 
 #Funcões que são executadas de acordo com o retorno do valor do GUI
 def executarscripts(values):
-    if values[0]:
+    
+    if values['chocoinstall']:
         print("Executando chocolatey")
         subprocess.call('C:\Windows\System32\powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString("https://chocolatey.org/install.ps1"))', shell=True)
-    if values[1]:
+    
+    if values['programsinstall']:
         print("Executando Instalacao")
         programas = ["adobereader", "javaruntime --x86SteamSteam", "spark", "teamviewer", "anydesk.install", "googlechrome" , "firefox"]
         for programa in programas:
             subprocess.call("choco install -y " + programa, shell=True)
-    if values[2]:
+    
+    if values['sisbrinstall']:
         createdirarcom()
         print("Baixando sisbr 2.0")
         if not os.path.isfile(diretorioarcom + "\\sisbr2.0.exe"):
@@ -64,10 +67,12 @@ def executarscripts(values):
             print("Download finalizado")
         print("Executando instalacao")
         subprocess.call(diretorioarcom + "\\sisbr2.0.exe")
-    if values[3]:
+    
+    if values['citrixcleanup']:
         print("Removendo registro")
         subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
-    if values[4]:
+    
+    if values['sicoobnetinstall']:
         createdirarcom()
         if not os.path.isfile(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
             print("Baixando Sicoobnet Empresarial")
@@ -75,6 +80,11 @@ def executarscripts(values):
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
         subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
+    
+    if values['limpezageral']:
+        if os.path.exists(diretorioarcom):
+            shutil.rmtree(diretorioarcom)
+
 
 #Funcao que gera o a GUI
 def Menu():
@@ -82,11 +92,12 @@ def Menu():
     sg.SetOptions(text_justification='right')
 
     flags = [
-            [sg.Checkbox('Instalar Chocolatey', size=(24, 1))],
-            [sg.Checkbox('Instalar programas padrão', size=(24, 1))],
-            [sg.Checkbox('Instalar sisbr 2.0', size=(24, 1))],
-            [sg.Checkbox('Remover registro do Citrix', size=(24, 1))],
-            [sg.Checkbox('Instalar SicoobNet empresarial', size=(24, 1))],
+            [sg.Checkbox('Instalar Chocolatey', key='chocoinstall', size=(24, 1))],
+            [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
+            [sg.Checkbox('Instalar sisbr 2.0', key='sisbrinstall', size=(24, 1))],
+            [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
+            [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
+            [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
             ]
 
     layout = [[sg.Frame('Opções:', flags, font='Any 12', title_color='black')], [
