@@ -20,8 +20,8 @@ jobs:
         pip install -r requirements.txt
     - name: build with pyinstaller
       run: |
-        pyinstaller --onefile python-menu.py
+        pyinstaller --onefile pythonmenugui.py
     - uses: actions/upload-artifact@v2
       with:
         name: python-menu.exe
-        path: D:\a\python-menu\python-menu\dist\python-menu.exe
+        path: D:\a\pythonmenugui\pythonmenugui\dist\pythonmenugui.exe
