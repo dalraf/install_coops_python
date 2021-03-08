@@ -1,0 +1,26 @@
+name: PyInstaller
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: build with pyinstaller
+      run: |
+        pyinstaller --onefile python-menu.py
+    - uses: actions/upload-artifact@v2
+      with:
+        name: python-menu.exe
+        path: D:\a\python-menu\python-menu\dist\python-menu.exe
