@@ -27,7 +27,7 @@ jobs:
         path: dist\pythonmenugui.exe
     - name: Define tag
       shell: bash
-      run: echo "::set-output name=tag::0.1"
+      run: echo "::set-output name=tag::0.1.1"
       id: get_tag
     - name: release
       uses: actions/create-release@v1

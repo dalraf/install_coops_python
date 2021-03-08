@@ -24,8 +24,6 @@ def Menu():
         sg.Button('Executar'), sg.Button('Cancelar')]]
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
-    button, values = window.Read()
-    sg.SetOptions(text_justification='left')
 
     while True:
         event, values = window.read()
