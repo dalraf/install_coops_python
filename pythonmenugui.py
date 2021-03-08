@@ -7,10 +7,13 @@ import os
 
 diretorioarcom = "c:\\arcom"
 
+#Cria Diretorio Arcom
 def createdirarcom():
     if not os.path.exists(diretorioarcom):
         os.mkdir(diretorioarcom)
 
+
+# Baixa arquivos do google drives
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
 
@@ -40,6 +43,8 @@ def save_response_content(response, destination):
             if chunk: # filter out keep-alive new chunks
                 f.write(chunk)
 
+
+#Funcões que são executadas de acordo com o retorno do valor do GUI
 def executarscripts(values):
     if values[0]:
         print("Executando chocolatey")
@@ -52,14 +57,25 @@ def executarscripts(values):
     if values[2]:
         createdirarcom()
         print("Baixando sisbr 2.0")
-        if not os.path.isfile("c:\\arcom\\sisbr2.0.exe"):
+        if not os.path.isfile(diretorioarcom + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
             destination = diretorioarcom + '\\sisbr2.0.exe'
             download_file_from_google_drive(file_id, destination)
             print("Download finalizado")
         print("Executando instalacao")
-        subprocess.call(diretorioarcom + "\\sisbr2.0.exe ")
+        subprocess.call(diretorioarcom + "\\sisbr2.0.exe")
+    if values[3]:
+        print("Removendo registro")
+        subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
+    if values[4]:
+        if not os.path.isfile(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
+            print("Baixando Sicoobnet Empresarial")
+            urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
+            download = requests.get(urlsicoobnet, allow_redirects=True)
+            open(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
+        subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
 
+#Funcao que gera o a GUI
 def Menu():
     sg.theme('LightBlue')
     sg.SetOptions(text_justification='right')
@@ -68,6 +84,8 @@ def Menu():
             [sg.Checkbox('Instalar Chocolatey', size=(24, 1))],
             [sg.Checkbox('Instalar programas padrão', size=(24, 1))],
             [sg.Checkbox('Instalar sisbr 2.0', size=(24, 1))],
+            [sg.Checkbox('Remover registro do Citrix', size=(24, 1))],
+            [sg.Checkbox('Instalar SicoobNet empresarial', size=(24, 1))],
             ]
 
     layout = [[sg.Frame('Opções:', flags, font='Any 12', title_color='black')], [
