@@ -68,6 +68,7 @@ def executarscripts(values):
         print("Removendo registro")
         subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
     if values[4]:
+        createdirarcom()
         if not os.path.isfile(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
             print("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
