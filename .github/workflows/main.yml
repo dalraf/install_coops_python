@@ -25,15 +25,10 @@ jobs:
       with:
         name: python-menu.exe
         path: dist\pythonmenugui.exe
-    - name: Get tag name from ref
+    - name: Define tag
       shell: bash
-      run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+      run: echo "::set-output name=tag::0.1"
       id: get_tag
-    - name: Create tag in public repository
-      run: |
-        cd ${{github.workspace}}
-        git tag ${{ steps.get_tag.outputs.tag }}
-        git push --tags --porcelain
     - name: release
       uses: actions/create-release@v1
       id: create_release
