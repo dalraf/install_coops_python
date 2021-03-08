@@ -24,14 +24,14 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: python-menu.exe
-        path: D:\a\pythonmenugui\pythonmenugui\dist\pythonmenugui.exe
+        path: dist\pythonmenugui.exe
     - name: Get tag name from ref
       shell: bash
       run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
       id: get_tag
     - name: Create tag in public repository
       run: |
-        cd ${{github.workspace}}/another_public_repo
+        cd ${{github.workspace}}
         git tag ${{ steps.get_tag.outputs.tag }}
         git push --tags --porcelain
     - name: release
@@ -50,6 +50,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: D:\a\pythonmenugui\pythonmenugui\dist\pythonmenugui.exe
+        asset_path: dist\pythonmenugui.exe
         asset_name: pythonmenugui.exe
         asset_content_type: application/exe
