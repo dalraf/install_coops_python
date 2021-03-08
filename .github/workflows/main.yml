@@ -25,14 +25,23 @@ jobs:
       with:
         name: python-menu.exe
         path: D:\a\pythonmenugui\pythonmenugui\dist\pythonmenugui.exe
+    - name: Get tag name from ref
+      shell: bash
+      run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
+      id: get_tag
+    - name: Create tag in public repository
+      run: |
+        cd ${{github.workspace}}/another_public_repo
+        git tag ${{ steps.get_tag.outputs.tag }}
+        git push --tags --porcelain
     - name: release
       uses: actions/create-release@v1
       id: create_release
       with:
         draft: false
         prerelease: false
-        release_name: Release ${{ github.ref }}
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ steps.get_tag.outputs.tag }}
+        release_name: Release ${{ steps.get_tag.outputs.tag }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: upload windows artifact
