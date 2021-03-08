@@ -14,12 +14,13 @@ def executarscripts(values):
 
 
 def Menu():
+    sg.theme('LightBlue')
     sg.SetOptions(text_justification='right')
 
     flags = [[sg.Checkbox('Instalar Chocolatey', size=(24, 1))],
              [sg.Checkbox('Instalar programas padrão', size=(24, 1))]]
 
-    layout = [[sg.Frame('Itens', flags, font='Any 12', title_color='yellow')], [
+    layout = [[sg.Frame('Itens', flags, font='Any 12', title_color='black')], [
         sg.Button('Executar'), sg.Button('Cancelar')]]
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
