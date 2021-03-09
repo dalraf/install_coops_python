@@ -38,8 +38,6 @@ jobs:
         prerelease: false
         tag_name: ${{ github.ref }}
         release_name: ${{ github.ref }}
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
     - name: upload windows artifact
       uses: actions/upload-release-asset@v1
       env:
