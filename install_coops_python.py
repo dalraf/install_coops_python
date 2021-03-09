@@ -5,7 +5,7 @@ import requests
 import os
 import shutil
 
-diretorioarcomdefault = "c:\\arcom"
+diretorioarcomdefault = "c:\\Arcom"
 
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
@@ -97,7 +97,7 @@ def Menu():
             [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             [sg.Checkbox('Instalar Chocolatey', key='chocoinstall', size=(24, 1))],
             [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
-            [sg.Checkbox('Instalar sisbr 2.0', key='sisbrinstall', size=(24, 1))],
+            [sg.Checkbox('Instalar Sisbr 2.0', key='sisbrinstall', size=(24, 1))],
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
