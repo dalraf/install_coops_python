@@ -20,8 +20,7 @@ programas = {
 
 #executa instalacao de programas
 def installprograma(programa):
-    env = os.environ.copy()
-    subprocess.call("c:\\ProgramData\\chocolatey\choco.exe install -y " + programa, env=env, shell=True)
+    subprocess.call("c:\\ProgramData\\chocolatey\choco.exe install -y " + programa, shell=True)
 
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
@@ -68,6 +67,8 @@ def executarscripts(values):
     if values['chocoinstall']:
         print("Executando chocolatey")
         subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
+        subprocess.call("c:\\ProgramData\\chocolatey\choco.exe config set cacheLocation " + diretorioarcom, shell=True)
+
 
     for descricao, comando in programas.items():
         if values[comando]:
