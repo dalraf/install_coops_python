@@ -19,12 +19,11 @@ programas = {
             }
 
 def configurespark():
-    filestring= """
-    passwordSaved=true
-    server=arcompbx.gotdns.com
-    hostAndPort=false
-    DisableHostnameVerification=true
-    """
+    filestring= """passwordSaved=true
+server=arcompbx.gotdns.com
+hostAndPort=false
+DisableHostnameVerification=true
+"""
     appdata = os.getenv('APPDATA')
     filesparkconf=appdata + "\\Spark\\spark.properties"
     with open(filesparkconf, "w") as sparkconf:
