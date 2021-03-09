@@ -6,6 +6,7 @@ import os
 import shutil
 
 diretorioarcomdefault = "c:\\Arcom"
+chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
 
 programas = {
             "Adobe Reader":"adobereader", 
@@ -20,7 +21,11 @@ programas = {
 
 #executa instalacao de programas
 def installprograma(programa):
-    subprocess.call("c:\\ProgramData\\chocolatey\choco.exe install -y " + programa, shell=True)
+    if not os.path.isfile(chocolateypath):
+        print("Executando chocolatey")
+        subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
+    subprocess.call(chocolateypath + " config set cacheLocation " + diretorioarcom, shell=True)
+    subprocess.call(chocolateypath + " install -y " + programa, shell=True)
 
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
@@ -63,12 +68,6 @@ def save_response_content(response, destination):
 def executarscripts(values):
 
     diretorioarcom = values['diretorioarcom']
-
-    if values['chocoinstall']:
-        print("Executando chocolatey")
-        subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
-        subprocess.call("c:\\ProgramData\\chocolatey\choco.exe config set cacheLocation " + diretorioarcom, shell=True)
-
 
     for descricao, comando in programas.items():
         if values[comando]:
@@ -121,7 +120,6 @@ def Menu():
 
     cabecalho = [
             [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
-            [sg.Checkbox('Instalar Chocolatey', key='chocoinstall', size=(24, 1))],
             ]
 
     rodape = [
