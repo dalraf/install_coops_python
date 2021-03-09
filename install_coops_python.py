@@ -7,6 +7,17 @@ import shutil
 
 diretorioarcomdefault = "c:\\Arcom"
 
+programas = {
+            "Adobe Reader":"adobereader", 
+            "Java" : "javaruntime --x86SteamSteam", 
+            "Spark": "spark", 
+            "Teamviewer": "teamviewer",
+            "Anydesk": "anydesk.install", 
+            "Google Chrome": "googlechrome" , 
+            "Firefox": "firefox"
+            }
+
+
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
     if not os.path.exists(diretorioarcom):
@@ -52,12 +63,16 @@ def executarscripts(values):
     if values['chocoinstall']:
         print("Executando chocolatey")
         subprocess.call('C:\Windows\System32\powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString("https://chocolatey.org/install.ps1"))', shell=True)
-    
+
+    for descricao, comando in programas.items():
+        if values[comando]:
+            print("Instalando " + descricao )
+            subprocess.call("choco install -y " + comando, shell=True)
+
     if values['programsinstall']:
-        print("Executando Instalacao")
-        programas = ["adobereader", "javaruntime --x86SteamSteam", "spark", "teamviewer", "anydesk.install", "googlechrome" , "firefox"]
-        for programa in programas:
-            subprocess.call("choco install -y " + programa, shell=True)
+        print("Executando instalacao de todos os programas")
+        for descricao, comando in programas.items():
+                subprocess.call("choco install -y " + comando, shell=True)
     
     if values['sisbrinstall']:
         createdirarcom(diretorioarcom)
@@ -92,16 +107,25 @@ def executarscripts(values):
 def Menu():
     sg.theme('LightBlue')
     sg.SetOptions(text_justification='right')
+    listainstalacao = []
 
-    flags = [
+    for descricao, comando in programas.items():
+        listainstalacao.append([sg.Checkbox('Instalar ' + descricao, key=comando, size=(24, 1))])
+
+    cabecalho = [
             [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             [sg.Checkbox('Instalar Chocolatey', key='chocoinstall', size=(24, 1))],
+            ]
+
+    rodape = [
             [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
             [sg.Checkbox('Instalar Sisbr 2.0', key='sisbrinstall', size=(24, 1))],
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
             ]
+    
+    flags = cabecalho + listainstalacao + rodape
 
     layout = [[sg.Frame('Opções:', flags, font='Any 12', title_color='black')], [
         sg.Button('Executar'), sg.Button('Cancelar')]]
