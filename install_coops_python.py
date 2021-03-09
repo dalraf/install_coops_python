@@ -18,6 +18,11 @@ programas = {
             }
 
 
+#executa instalacao de programas
+def installprograma(programa):
+    env = os.environ.copy()
+    subprocess.call("choco install -y " + programa, env=env, shell=True)
+
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
     if not os.path.exists(diretorioarcom):
@@ -67,12 +72,13 @@ def executarscripts(values):
     for descricao, comando in programas.items():
         if values[comando]:
             print("Instalando " + descricao )
-            subprocess.call("powershell.exe choco install -y " + comando, shell=True)
+            installprograma(comando)
+            
 
     if values['programsinstall']:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
-                subprocess.call("powershell.exe choco install -y " + comando, shell=True)
+                installprograma(comando)
     
     if values['sisbrinstall']:
         createdirarcom(diretorioarcom)
