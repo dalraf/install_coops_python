@@ -1,4 +1,4 @@
-# install_coops_gui
+# install_coops_python
 
 Script python para windows para instalação automatizada. v0.1.28
 
