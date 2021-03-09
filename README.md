@@ -1,4 +1,4 @@
-# pythonmenugui
+# install_coops_gui
 
 Script python para windows para instalação automatizada.
 
