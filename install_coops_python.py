@@ -5,10 +5,10 @@ import requests
 import os
 import shutil
 
-diretorioarcom = "c:\\arcom"
+diretorioarcomdefault = "c:\\arcom"
 
 #Cria Diretorio Arcom
-def createdirarcom():
+def createdirarcom(diretorioarcom):
     if not os.path.exists(diretorioarcom):
         os.mkdir(diretorioarcom)
 
@@ -46,7 +46,9 @@ def save_response_content(response, destination):
 
 #Funcões que são executadas de acordo com o retorno do valor do GUI
 def executarscripts(values):
-    
+
+    diretorioarcom = values['diretorioarcom']
+
     if values['chocoinstall']:
         print("Executando chocolatey")
         subprocess.call('C:\Windows\System32\powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString("https://chocolatey.org/install.ps1"))', shell=True)
@@ -58,7 +60,7 @@ def executarscripts(values):
             subprocess.call("choco install -y " + programa, shell=True)
     
     if values['sisbrinstall']:
-        createdirarcom()
+        createdirarcom(diretorioarcom)
         print("Baixando sisbr 2.0")
         if not os.path.isfile(diretorioarcom + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
@@ -73,7 +75,7 @@ def executarscripts(values):
         subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
     
     if values['sicoobnetinstall']:
-        createdirarcom()
+        createdirarcom(diretorioarcom)
         if not os.path.isfile(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
             print("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
@@ -92,6 +94,7 @@ def Menu():
     sg.SetOptions(text_justification='right')
 
     flags = [
+            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             [sg.Checkbox('Instalar Chocolatey', key='chocoinstall', size=(24, 1))],
             [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
             [sg.Checkbox('Instalar sisbr 2.0', key='sisbrinstall', size=(24, 1))],
