@@ -25,6 +25,8 @@ hostAndPort=false
 DisableHostnameVerification=true
 """
     appdata = os.getenv('APPDATA')
+    if not os.path.exists(appdata + '\\Spark'):
+        os.mkdir(appdata + '\\Spark'
     filesparkconf=appdata + "\\Spark\\spark.properties"
     with open(filesparkconf, "w") as sparkconf:
         sparkconf.write(filestring)
