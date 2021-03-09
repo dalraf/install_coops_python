@@ -8,6 +8,12 @@ import shutil
 diretorioarcomdefault = "c:\\Arcom"
 chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
 
+filestringspark= """passwordSaved=true
+server=arcompbx.gotdns.com
+hostAndPort=false
+DisableHostnameVerification=true
+"""
+
 programas = {
             "Adobe Reader":"adobereader", 
             "Java" : "javaruntime --x86SteamSteam", 
@@ -18,22 +24,18 @@ programas = {
             "Firefox": "firefox"
             }
 
+#Configura spark
 def configurespark():
-    filestring= """passwordSaved=true
-server=arcompbx.gotdns.com
-hostAndPort=false
-DisableHostnameVerification=true
-"""
     appdata = os.getenv('APPDATA')
     if not os.path.exists(appdata + '\\Spark'):
-        os.mkdir(appdata + '\\Spark'
-    filesparkconf=appdata + "\\Spark\\spark.properties"
+        os.mkdir(appdata + '\\Spark')
+    filesparkconf = appdata + '\\Spark\\spark.properties'
     with open(filesparkconf, "w") as sparkconf:
-        sparkconf.write(filestring)
+        sparkconf.write(filestringspark)
     sparkconf.close()
 
 
-#executa instalacao de programas
+#Executa instalacao de programas
 def installprograma(diretorioarcom, programa):
     if not os.path.isfile(chocolateypath):
         print("Executando chocolatey")
@@ -47,8 +49,23 @@ def createdirarcom(diretorioarcom):
         os.mkdir(diretorioarcom)
 
 
-# Baixa arquivos do google drives
+#Baixa arquivos do google drives
 def download_file_from_google_drive(id, destination):
+    
+    def get_confirm_token(response):
+        for key, value in response.cookies.items():
+            if key.startswith('download_warning'):
+                return value
+        return None
+
+    def save_response_content(response, destination):
+        CHUNK_SIZE = 32768
+
+        with open(destination, "wb") as f:
+            for chunk in response.iter_content(CHUNK_SIZE):
+                if chunk: # filter out keep-alive new chunks
+                    f.write(chunk)
+
     URL = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
@@ -62,23 +79,8 @@ def download_file_from_google_drive(id, destination):
 
     save_response_content(response, destination)    
 
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
 
-    return None
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk: # filter out keep-alive new chunks
-                f.write(chunk)
-
-
-#Funcões que são executadas de acordo com o retorno do valor do GUI
+#Função que é executada de acordo com o retorno do valor do GUI
 def executarscripts(values):
 
     diretorioarcom = values['diretorioarcom']
