@@ -140,22 +140,29 @@ def Menu():
     for descricao, comando in programas.items():
         listainstalacao.append([sg.Checkbox('Instalar ' + descricao, key=comando, size=(24, 1))])
 
-    cabecalho = [
+    diretorio = [
             [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             ]
 
-    rodape = [
+    instalacao = [
             [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
             [sg.Checkbox('Instalar Sisbr 2.0', key='sisbrinstall', size=(24, 1))],
-            [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
-            [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
             ]
-    
-    flags = cabecalho + listainstalacao + rodape
+    dominio = [
+            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Text('Senha:    '),sg.Input('',key='senha', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
+            ]
+    configuracao = [
+            [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
+            [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
+            [sg.Checkbox('Adicionado ao domínio', key='adicionaraocominio', size=(24, 1))],
+            [sg.Frame('Domínio:', dominio , font='Any 12', title_color='black')],
+             ]
 
-    layout = [[sg.Frame('Opções:', flags, font='Any 12', title_color='black')], [
-        sg.Button('Executar'), sg.Button('Cancelar')]]
+    layout = [[sg.Frame('Instalação:', listainstalacao + instalacao , font='Any 12', title_color='black'),sg.Frame('Configuração:',configuracao , font='Any 12', title_color='black')]
+              ,[sg.Button('Executar'), sg.Button('Cancelar')]]
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
 
