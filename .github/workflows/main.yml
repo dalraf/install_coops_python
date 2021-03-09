@@ -1,6 +1,9 @@
 name: PyInstaller
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -28,11 +31,13 @@ jobs:
     - name: release
       uses: actions/create-release@v1
       id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         draft: false
         prerelease: false
-        tag_name: 0.1.6
-        release_name: 0.1.6
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: upload windows artifact
