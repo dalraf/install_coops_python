@@ -24,6 +24,10 @@ programas = {
             "Firefox": "firefox"
             }
 
+def addtodomain(dominio,usuario,password):
+    adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{password}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{user}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
+    subprocess.call(adddomaincommand) 
+
 #Configura spark
 def configurespark():
     appdata = os.getenv('APPDATA')
