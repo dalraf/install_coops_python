@@ -31,8 +31,8 @@ jobs:
       with:
         draft: false
         prerelease: false
-        tag_name: 0.1.5
-        release_name: 0.1.5
+        tag_name: 0.1.6
+        release_name: 0.1.6
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: upload windows artifact
