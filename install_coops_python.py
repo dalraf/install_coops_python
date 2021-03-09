@@ -67,12 +67,12 @@ def executarscripts(values):
     for descricao, comando in programas.items():
         if values[comando]:
             print("Instalando " + descricao )
-            subprocess.call("powershell.exe","choco install -y " + comando, shell=True)
+            subprocess.call("powershell.exe choco install -y " + comando, shell=True)
 
     if values['programsinstall']:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
-                subprocess.call("powershell.exe","choco install -y " + comando, shell=True)
+                subprocess.call("powershell.exe choco install -y " + comando, shell=True)
     
     if values['sisbrinstall']:
         createdirarcom(diretorioarcom)
