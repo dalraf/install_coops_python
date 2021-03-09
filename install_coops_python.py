@@ -21,7 +21,7 @@ programas = {
 #executa instalacao de programas
 def installprograma(programa):
     env = os.environ.copy()
-    subprocess.call("choco install -y " + programa, env=env, shell=True)
+    subprocess.call("c:\\ProgramData\\chocolatey\choco.exe install -y " + programa, env=env, shell=True)
 
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
