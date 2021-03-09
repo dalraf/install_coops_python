@@ -20,11 +20,11 @@ jobs:
         pip install -r requirements.txt
     - name: build with pyinstaller
       run: |
-        pyinstaller --onefile pythonmenugui.py
+        pyinstaller --onefile install_coops_python.py
     - uses: actions/upload-artifact@v2
       with:
         name: python-menu.exe
-        path: dist\pythonmenugui.exe
+        path: dist\install_coops_python.exe
     - name: release
       uses: actions/create-release@v1
       id: create_release
@@ -41,6 +41,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist\pythonmenugui.exe
-        asset_name: pythonmenugui.exe
+        asset_path: dist\install_coops_python.exe
+        asset_name: install_coops_python.exe
         asset_content_type: application/exe
