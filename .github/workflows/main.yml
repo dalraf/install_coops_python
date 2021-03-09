@@ -3,7 +3,7 @@ name: PyInstaller
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   build:
