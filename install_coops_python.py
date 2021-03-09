@@ -20,7 +20,7 @@ programas = {
 
 
 #executa instalacao de programas
-def installprograma(programa):
+def installprograma(diretorioarcom, programa):
     if not os.path.isfile(chocolateypath):
         print("Executando chocolatey")
         subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
@@ -72,13 +72,13 @@ def executarscripts(values):
     for descricao, comando in programas.items():
         if values[comando]:
             print("Instalando " + descricao )
-            installprograma(comando)
+            installprograma(diretorioarcom,comando)
             
 
     if values['programsinstall']:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
-                installprograma(comando)
+                installprograma(diretorioarcom,comando)
     
     if values['sisbrinstall']:
         createdirarcom(diretorioarcom)
