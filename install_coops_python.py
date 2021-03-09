@@ -126,6 +126,9 @@ def executarscripts(values):
             open(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
         subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
     
+    if values['adicionaraocominio']:
+        addtodomain(values['dominio'],values['usuario'],values['password'])
+    
     if values['limpezageral']:
         if os.path.exists(diretorioarcom):
             shutil.rmtree(diretorioarcom)
@@ -150,14 +153,14 @@ def Menu():
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
             ]
     dominio = [
+            [sg.Checkbox('Adicionar ao domínio', key='adicionaraocominio', size=(24, 1))],
             [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
-            [sg.Text('Senha:    '),sg.Input('',key='senha', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
             ]
     configuracao = [
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
-            [sg.Checkbox('Adicionado ao domínio', key='adicionaraocominio', size=(24, 1))],
             [sg.Frame('Domínio:', dominio , font='Any 12', title_color='black')],
              ]
 
