@@ -1,5 +1,5 @@
 # install_coops_gui
 
-Script python para windows para instalação automatizada. v0.1.23
+Script python para windows para instalação automatizada. v0.1.24
 
-[Download da última versão](https://github.com/dalraf/install_coops_python/releases/download/v0.1.23/install_coops_python.exe)
+[Download da última versão](https://github.com/dalraf/install_coops_python/releases/download/v0.1.24/install_coops_python.exe)
