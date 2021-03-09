@@ -18,6 +18,19 @@ programas = {
             "Firefox": "firefox"
             }
 
+def configurespark():
+    filestring= """
+    passwordSaved=true
+    server=arcompbx.gotdns.com
+    hostAndPort=false
+    DisableHostnameVerification=true
+    """
+    appdata = os.getenv('APPDATA')
+    filesparkconf=appdata + "\\Spark\\spark.properties"
+    with open(filesparkconf, "w") as sparkconf:
+        sparkconf.write(filestring)
+    sparkconf.close()
+
 
 #executa instalacao de programas
 def installprograma(diretorioarcom, programa):
@@ -73,12 +86,14 @@ def executarscripts(values):
         if values[comando]:
             print("Instalando " + descricao )
             installprograma(diretorioarcom,comando)
-            
 
     if values['programsinstall']:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
                 installprograma(diretorioarcom,comando)
+        
+    if values['spark']:
+        configurespark()
     
     if values['sisbrinstall']:
         createdirarcom(diretorioarcom)
