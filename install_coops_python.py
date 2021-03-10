@@ -62,9 +62,9 @@ def Menu():
 
     dominio = [
             [sg.Checkbox(executor.adicionaraodominio.descricao, key=executor.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
-            [sg.Text(executor.adicionaraodominio.dominio.descricao),sg.Input('',key=executor.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
-            [sg.Text(executor.adicionaraodominio.usuario.descricao),sg.Input('',key=executor.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
-            [sg.Text(executor.adicionaraodominio.senha.descricao),sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text(executor.adicionaraodominio.dominio.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1) , disabled=True)],
+            [sg.Text(executor.adicionaraodominio.usuario.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Text(executor.adicionaraodominio.senha.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
             ]
     configuracao = [
             [sg.Text(executor.diretorioarcom.descricao),sg.Input(executor.diretorioarcom.diretorio,key=executor.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],

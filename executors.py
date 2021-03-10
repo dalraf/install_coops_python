@@ -54,13 +54,13 @@ class Dominio():
 
 class Usuario():
     def __init__(self):
-        self.descricao = "Usuario: "
+        self.descricao = "Usuario:"
         self.definicao = 'usuario'
         self.valor = ""
 
 class Senha():
     def __init__(self):
-        self.descricao = "Senha:   "
+        self.descricao = "Senha:"
         self.definicao = 'senha'
         self.valor = ""
 
