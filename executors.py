@@ -60,7 +60,7 @@ class Usuario():
 
 class Senha():
     def __init__(self):
-        self.descricao = "Senha: "
+        self.descricao = "Senha:   "
         self.definicao = 'senha'
         self.valor = ""
 
