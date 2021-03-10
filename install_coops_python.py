@@ -29,7 +29,7 @@ def executarscripts(values,executor):
         if values[program.definicao]:
             program.configurar()
     
-    for configuracao in executor.allconfiguration.lista:
+    for configuracao in executor.allcconfiguracao.lista:
         if values[configuracao.definicao]:
             configuracao.configurar()
        

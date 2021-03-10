@@ -72,7 +72,10 @@ class Adicionaraodominio():
         self.descricao = "Adicionar ao domínio"
         self.definicao = "addtodomain"
     
-    def configurar(self):
+    def configurar(self,dominio,usuario,senha):
+        self.dominio.valor = dominio
+        self.usuario.valor = usuario
+        self.senha.valor = senha
         print("Adicionando ao domínio")
         addtodomain(self.dominio.valor,self.usuario.valor,self.senha.valor)
 
