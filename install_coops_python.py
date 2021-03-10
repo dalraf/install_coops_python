@@ -24,6 +24,7 @@ programas = {
             "Firefox": "firefox"
             }
 
+#Função para adicionar no domínio
 def addtodomain(dominio,usuario,password):
     adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{password}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{user}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
     subprocess.call(adddomaincommand) 
@@ -133,6 +134,9 @@ def executarscripts(values):
         if os.path.exists(diretorioarcom):
             shutil.rmtree(diretorioarcom)
 
+    if values['reniciar']:
+        subprocess.call("shutdown /t0 /r")
+
 
 #Funcao que gera o a GUI
 def Menu():
@@ -161,6 +165,7 @@ def Menu():
     configuracao = [
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
+            [sg.Checkbox('Reniciar cpu após execuçào', key='reiniciar', size=(24, 1))],
             [sg.Frame('Domínio:', dominio , font='Any 12', title_color='black')],
              ]
 
