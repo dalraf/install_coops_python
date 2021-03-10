@@ -5,128 +5,22 @@ import requests
 import os
 import shutil
 import zipfile
+from executors import Executor
+from vars import *
 
-varprogramasinstall = 'programasinstall'
-varspark = 'spark'
-varsisbrinstall = 'sisbrinstall'
-varcitrixinstall = 'citrixinstall'
-varcitrixcleanup = 'citrixcleanup'
-varsicoobnetinstall = 'sicoobnetinstall'
-varadicionarodominio = 'adicionaraodominio'
-varlimpezageral = 'limpezageral'
-varlimpezageral = 'limpezageral'
-varreniciar = 'varreiniciar'
-vardiretorioarcom = 'diretorioarcom'
-vardominio = 'dominio'
-varusuario = 'usuario'
-varsenha = 'senha'
+executor = Executor("c:\\Arcom")
 
-diretorioarcomdefault = "c:\\Arcom"
-chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
-
-filestringspark= """passwordSaved=true
-server=arcompbx.gotdns.com
-hostAndPort=false
-DisableHostnameVerification=true
-"""
-
-programas = {
-            "Adobe Reader":"adobereader",
-            "Adobe Air": "adobeair",
-            "Java" : "javaruntime --x86SteamSteam",
-            "Spark": "spark",
-            "Teamviewer": "teamviewer",
-            "Anydesk": "anydesk.install",
-            "Google Chrome": "googlechrome" ,
-            "Firefox": "firefox"
-            }
-
-#Alterar campos do domínio
-def mudarestadocamposdominio(window,estado):
-    window['dominio'].update(disabled = not estado)
-    window['usuario'].update(disabled = not estado)
-    window['senha'].update(disabled = not estado)
-    pass
-
-#Função para adicionar no domínio
-def addtodomain(dominio,usuario,senha):
-    subprocess.call(f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"$domain = "{dominio}"; $password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = \'{usuario}@$domain\';$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential\"', shell=True)
- 
-#Configura spark
-def configurespark():
-    appdata = os.getenv('APPDATA')
-    if not os.path.exists(appdata + '\\Spark'):
-        os.mkdir(appdata + '\\Spark')
-    filesparkconf = appdata + '\\Spark\\spark.properties'
-    with open(filesparkconf, "w") as sparkconf:
-        sparkconf.write(filestringspark)
-    sparkconf.close()
-
-
-#Executa instalacao de programas
-def installprograma(diretorioarcom, programa):
-    if not os.path.isfile(chocolateypath):
-        print("Executando chocolatey")
-        subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
-    subprocess.call(chocolateypath + " config set cacheLocation " + diretorioarcom, shell=True)
-    subprocess.call(chocolateypath + " install -y " + programa, shell=True)
-
-def criardiretorio(diretorio):
-    if not os.path.exists(diretorio):
-        os.mkdir(diretorio)    
-
-#Cria Diretorio Arcom
-def createdirarcom(diretorioarcom):
-    criardiretorio(diretorioarcom)
-
-#Baixa arquivos do google drives
-def download_file_from_google_drive(id, destination):
-    
-    def get_confirm_token(response):
-        for key, value in response.cookies.items():
-            if key.startswith('download_warning'):
-                return value
-        return None
-
-    def save_response_content(response, destination):
-        CHUNK_SIZE = 32768
-
-        with open(destination, "wb") as f:
-            for chunk in response.iter_content(CHUNK_SIZE):
-                if chunk: # filter out keep-alive new chunks
-                    f.write(chunk)
-
-    URL = "https://docs.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(URL, params = { 'id' : id }, stream = True)
-    token = get_confirm_token(response)
-
-    if token:
-        params = { 'id' : id, 'confirm' : token }
-        response = session.get(URL, params = params, stream = True)
-
-    save_response_content(response, destination)    
 
 
 #Função que é executada de acordo com o retorno do valor do GUI
-def executarscripts(values):
+def executarscripts(values,executor):
 
-    diretorioarcom = values[vardiretorioarcom]
 
-    for descricao, comando in programas.items():
-        if values[comando]:
-            print("Instalando " + descricao )
-            installprograma(diretorioarcom,comando)
-    
-    if values[varprogramasinstall]:
-        print("Executando instalacao de todos os programas")
-        for descricao, comando in programas.items():
-                installprograma(diretorioarcom,comando)
+    executor = Executor(values[executor.diretorioarcom.definicao])
 
-    if values[varspark]:
-        configurespark()
+    for program in executor.allprograms.lista:
+        if values[program.definicao]:
+            program.configurar()
     
     if values[varsisbrinstall]:
         createdirarcom(diretorioarcom)
@@ -184,12 +78,12 @@ def Menu():
     sg.SetOptions(text_justification='right')
     listainstalacao = []
 
-    for descricao, comando in programas.items():
-        listainstalacao.append([sg.Checkbox('Instalar ' + descricao, key=comando, size=(24, 1))])
+    for program in executor.allprograms.lista:
+        listainstalacao.append([sg.Checkbox(program.descricao , key=program.definicao, size=(24, 1))])
 
 
     instalacao = [
-            [sg.Checkbox('Instalar programas padrão', key=varprogramasinstall, size=(24, 1))],
+            [sg.Checkbox(executor.allprograms.descricao, key=executor.allprograms.descricao, size=(24, 1))],
             [sg.Checkbox('Instalar Sisbr 2.0', key=varsisbrinstall, size=(24, 1))],
             [sg.Checkbox('Instalar Citrix 10', key=varcitrixinstall, size=(24, 1))],
             [sg.Checkbox('Instalar SicoobNet empresarial', key=varsicoobnetinstall, size=(24, 1))],
@@ -201,7 +95,7 @@ def Menu():
             [sg.Text('Senha:    '),sg.Input('',key=varsenha, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
-            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key=vardiretorioarcom, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Text(executor.diretorioarcom.descricao),sg.Input(executor.diretorioarcom.diretorio,key=executor.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
             [sg.Checkbox('Remover registro do Citrix', key=varcitrixcleanup, size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key=varlimpezageral, size=(24, 1))],
             [sg.Checkbox('Reniciar cpu após execuçào', key=varreniciar, size=(24, 1))],
@@ -220,7 +114,7 @@ def Menu():
             mudarestadocamposdominio(window,values['adicionaraodominio'])
 
         if event == 'Executar':
-            executarscripts(values)
+            executarscripts(values,executor)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
