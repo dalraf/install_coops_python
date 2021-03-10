@@ -6,11 +6,6 @@ import shutil
 import zipfile
 from vars import *
 
-#Alterar campos do domínio
-def mudarestadocamposdominio(window,estado):
-    window['dominio'].update(disabled = not estado)
-    window['usuario'].update(disabled = not estado)
-    window['senha'].update(disabled = not estado)
 
 #Função para adicionar no domínio
 def addtodomain(dominio,usuario,senha):

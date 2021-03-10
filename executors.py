@@ -47,25 +47,25 @@ class Allconfiguration():
             configuracao.configurar()
 
 class Dominio():
-    def __init__(self)
+    def __init__(self):
         self.descricao = "Domínio:"
         self.definicao = 'dominio'
         self.valor = ""
 
 class Usuario():
-    def __init__(self)
+    def __init__(self):
         self.descricao = "Usuario: "
         self.definicao = 'usuario'
         self.valor = ""
 
 class Senha():
-    def __init__(self)
+    def __init__(self):
         self.descricao = "Senha: "
         self.definicao = 'senha'
         self.valor = ""
 
 class Adicionaraodominio():
-    def __init__(self):
+    def __init__(self,diretorio):
         self.dominio = Dominio()
         self.usuario = Usuario()
         self.senha = Senha()
