@@ -24,6 +24,11 @@ programas = {
             "Firefox": "firefox"
             }
 
+#Alterar campos do domínio
+def mudarestadocamposdominio(window):
+    print("oi")
+    pass
+
 #Função para adicionar no domínio
 def addtodomain(dominio,usuario,password):
     adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{password}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{user}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
@@ -157,10 +162,10 @@ def Menu():
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
             ]
     dominio = [
-            [sg.Checkbox('Adicionar ao domínio', key='adicionaraocominio', size=(24, 1))],
-            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
-            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
-            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Checkbox('Adicionar ao domínio', key='adicionaraocominio', size=(24, 1), enable_events=True)],
+            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
+            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
@@ -176,11 +181,17 @@ def Menu():
 
     while True:
         event, values = window.read()
+
+        if event == 'Adicionar ao domínio':
+            mudarestadocamposdominio(window)
+
         if event == 'Executar':
             executarscripts(values)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
+    
+    window.close()
 
 if __name__ == '__main__':
     Menu()
