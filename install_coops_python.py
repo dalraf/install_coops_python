@@ -10,6 +10,12 @@ from vars import *
 
 executor = Executor("c:\\Arcom")
 
+#Alterar campos do domínio
+def mudarestadocamposdominio(window,estado):
+    window[executor.adicionaraodominio.dominio.definicao].update(disabled = not estado)
+    window[executor.adicionaraodominio.usuario.definicao].update(disabled = not estado)
+    window[executor.adicionaraodominio.senha.definicao].update(disabled = not estado)
+
 
 
 #Função que é executada de acordo com o retorno do valor do GUI
@@ -58,7 +64,7 @@ def Menu():
             [sg.Checkbox(executor.adicionaraodominio.descricao, key=executor.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
             [sg.Text(executor.adicionaraodominio.dominio.descricao),sg.Input('',key=executor.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
             [sg.Text(executor.adicionaraodominio.usuario.descricao),sg.Input('',key=executor.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
-            [sg.Text(executor.adicionaraodominio.senha.descricao,sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text(executor.adicionaraodominio.senha.descricao),sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
             [sg.Text(executor.diretorioarcom.descricao),sg.Input(executor.diretorioarcom.diretorio,key=executor.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
@@ -73,8 +79,8 @@ def Menu():
     while True:
         event, values = window.read()
 
-        if event == 'adicionaraodominio':
-            mudarestadocamposdominio(window,values['adicionaraodominio'])
+        if event == executor.adicionaraodominio.definicao:
+            mudarestadocamposdominio(window,values[executor.adicionaraodominio.definicao])
 
         if event == 'Executar':
             executarscripts(values,executor)
