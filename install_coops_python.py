@@ -4,6 +4,22 @@ import subprocess
 import requests
 import os
 import shutil
+import zipfile
+
+varprogramasinstall = 'programsinstall'
+varspark = 'spark'
+varsisbrinstall = 'sisbrinstall'
+varcitrixinstall = 'citrixinstall'
+varcitrixcleanup = 'citrixcleanup'
+varsicoobnetinstall = 'sicoobnetinstall'
+varadicionarodominio = 'adicionaraodominio'
+varlimpezageral = 'limpezageral'
+varlimpezageral = 'limpezageral'
+varreniciar = 'varreiniciar'
+vardiretorioarcom = 'diretorioarcom'
+vardominio = 'dominio'
+varusuario = 'usuario'
+varsenha = 'senha'
 
 diretorioarcomdefault = "c:\\Arcom"
 chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
@@ -54,11 +70,13 @@ def installprograma(diretorioarcom, programa):
     subprocess.call(chocolateypath + " config set cacheLocation " + diretorioarcom, shell=True)
     subprocess.call(chocolateypath + " install -y " + programa, shell=True)
 
+def criardiretorio(diretorio):
+    if not os.path.exists(diretorio):
+        os.mkdir(diretorio)    
+
 #Cria Diretorio Arcom
 def createdirarcom(diretorioarcom):
-    if not os.path.exists(diretorioarcom):
-        os.mkdir(diretorioarcom)
-
+    criardiretorio(diretorioarcom)
 
 #Baixa arquivos do google drives
 def download_file_from_google_drive(id, destination):
@@ -94,22 +112,22 @@ def download_file_from_google_drive(id, destination):
 #Função que é executada de acordo com o retorno do valor do GUI
 def executarscripts(values):
 
-    diretorioarcom = values['diretorioarcom']
+    diretorioarcom = values[vardiretorioarcom]
 
     for descricao, comando in programas.items():
         if values[comando]:
             print("Instalando " + descricao )
             installprograma(diretorioarcom,comando)
-
-    if values['programsinstall']:
+    
+    if values[programasinstall]:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
                 installprograma(diretorioarcom,comando)
-        
-    if values['spark']:
+
+    if values[spark]:
         configurespark()
     
-    if values['sisbrinstall']:
+    if values[varsisbrinstall]:
         createdirarcom(diretorioarcom)
         print("Baixando sisbr 2.0")
         if not os.path.isfile(diretorioarcom + "\\sisbr2.0.exe"):
@@ -119,12 +137,27 @@ def executarscripts(values):
             print("Download finalizado")
         print("Executando instalacao")
         subprocess.call(diretorioarcom + "\\sisbr2.0.exe")
+
+    if values[varcitrixinstall]:
+        createdirarcom(diretorioarcom)
+        diretoriocitrix = diretorioarcom + "\\Citrix"
+        criardiretorio(diretoriocitrix)
+        print("Baixando citrix 10")
+        if not os.path.isfile(diretorioarcom + "\\Citrix10.zip"):
+            file_id = '19o1eGqGL6xR1B9b3VYunea4zzYe3Heb9'
+            destination = diretorioarcom + '\\Citrix10.zip'
+            download_file_from_google_drive(file_id, destination)
+            print("Download finalizado")
+        print("Executando descompacação")
+        with zipfile.ZipFile(diretorioarcom + '\\Citrix10.zip', 'r') as citrixzip:
+            citrixzip.extractall(diretoriocitrix)
+        subprocess.call('msiexec /i ' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi')
     
-    if values['citrixcleanup']:
+    if values[varcitrixcleanup]:
         print("Removendo registro")
         subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
     
-    if values['sicoobnetinstall']:
+    if values[varsicoobnetinstall]:
         createdirarcom(diretorioarcom)
         if not os.path.isfile(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
             print("Baixando Sicoobnet Empresarial")
@@ -133,14 +166,14 @@ def executarscripts(values):
             open(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
         subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
     
-    if values['adicionaraodominio']:
-        addtodomain(values['dominio'],values['usuario'],values['senha'])
+    if values[varadicionarodominio]:
+        addtodomain(values[vardominio],values[varusuario],values[varsenha])
     
-    if values['limpezageral']:
+    if values[varlimpezageral]:
         if os.path.exists(diretorioarcom):
             shutil.rmtree(diretorioarcom)
 
-    if values['reiniciar']:
+    if values[varreniciar]:
         subprocess.call("shutdown /t0 /r")
 
 
@@ -155,21 +188,22 @@ def Menu():
 
 
     instalacao = [
-            [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
-            [sg.Checkbox('Instalar Sisbr 2.0', key='sisbrinstall', size=(24, 1))],
-            [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
+            [sg.Checkbox('Instalar programas padrão', key=varprogramasinstall, size=(24, 1))],
+            [sg.Checkbox('Instalar Sisbr 2.0', key=varsisbrinstall, size=(24, 1))],
+            [sg.Checkbox('Instalar Citrix 10', key=varcitrixinstall, size=(24, 1))],
+            [sg.Checkbox('Instalar SicoobNet empresarial', key=varsicoobnetinstall, size=(24, 1))],
             ]
     dominio = [
-            [sg.Checkbox('Adicionar ao domínio', key='adicionaraodominio', size=(24, 1), enable_events=True)],
-            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
-            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
-            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Checkbox('Adicionar ao domínio', key=varadicionarodominio, size=(24, 1), enable_events=True)],
+            [sg.Text('Domínio: '),sg.Input('',key=vardominio, background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
+            [sg.Text('Usuário:  '),sg.Input('',key=varusuario, background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text('Senha:    '),sg.Input('',key=varsenha, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
-            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
-            [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
-            [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
-            [sg.Checkbox('Reniciar cpu após execuçào', key='reiniciar', size=(24, 1))],
+            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key=vardiretorioarcom, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Checkbox('Remover registro do Citrix', key=varcitrixcleanup, size=(24, 1))],
+            [sg.Checkbox('Limpeza do diretório Arcom', key=varlimpezageral, size=(24, 1))],
+            [sg.Checkbox('Reniciar cpu após execuçào', key=varreniciar, size=(24, 1))],
             [sg.Frame('Domínio:', dominio , font='Any 12', title_color='black')],
              ]
 
