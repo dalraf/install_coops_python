@@ -33,9 +33,8 @@ def mudarestadocamposdominio(window,estado):
 
 #Função para adicionar no domínio
 def addtodomain(dominio,usuario,senha):
-    adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{usuario}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
-    subprocess.call(adddomaincommand) 
-
+    subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"$domain = "{dominio}"; $password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{usuario}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential\"', shell=True)
+ 
 #Configura spark
 def configurespark():
     appdata = os.getenv('APPDATA')
@@ -141,7 +140,7 @@ def executarscripts(values):
         if os.path.exists(diretorioarcom):
             shutil.rmtree(diretorioarcom)
 
-    if values['reniciar']:
+    if values['reiniciar']:
         subprocess.call("shutdown /t0 /r")
 
 
