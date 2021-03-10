@@ -1,3 +1,5 @@
+import shutil
+import zipfile
 from vars import *
 from functions import *
 
@@ -14,7 +16,12 @@ class Executor():
         self.googlechrome = Googlechrome(self.diretorioarcom.diretorio)
         self.firefox = Firefox(self.diretorioarcom.diretorio)
         self.allprograms = Allprograms(self.diretorioarcom.diretorio)
-
+        self.sisbrinstall = Sisbrinstall(self.diretorioarcom.diretorio)
+        self.citrix10install = Citrixinstall(self.diretorioarcom.diretorio)
+        self.allcconfiguracao = Allconfiguration(self.diretorioarcom.diretorio)
+        self.citrixcleanup = Citrixcleanup(self.diretorioarcom.diretorio)
+        self.limpezageral = Limpezageral(self.diretorioarcom.diretorio)
+        self.reniciar = Reniciar(self.diretorioarcom.diretorio)
 
 class Diretorioarcom():
 
@@ -24,17 +31,133 @@ class Diretorioarcom():
         self.diretorio = diretorio
 
 
+
+class Allconfiguration():
+
+    def __init__(self,diretorio):
+        self.diretorio = diretorio
+        self.lista  = [Citrixcleanup(self.diretorio), \
+                       Limpezageral(self.diretorio), \
+                       Reniciar(self.diretorio),
+                    ]
+    
+    def configurar(self):
+        for configuracao in self.lista:
+            configuracao.configurar()
+
+
+class Citrixcleanup():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Limpar registro do Citrix"
+        self.definicao = "citrixcleanup"
+    
+    def configurar(self):
+        print("Removendo registro")
+        subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
+
+class Limpezageral():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Limpar diretório Arcom"
+        self.definicao = "limpezageral"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        if os.path.exists(self.diretorio):
+            shutil.rmtree(self.diretorio)
+
+class Reniciar():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Reniciar cpu após execução"
+        self.definicao = "reniciar"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        subprocess.call("shutdown /t0 /r")
+
+
 class Allprograms():
 
     def __init__(self,diretorio):
         self.descricao = "Instalação programas padrão"
         self.definicao = "allprograms"
         self.diretorio = diretorio
-        self.lista  = [Spark(self.diretorio), Adobeair(self.diretorio), Java(self.diretorio), Teamviewer(self.diretorio), Anydesk(self.diretorio), Googlechrome(self.diretorio), Firefox(self.diretorio)]
+        self.lista  = [Spark(self.diretorio), \
+                    Adobeair(self.diretorio), \
+                    Java(self.diretorio), \
+                    Teamviewer(self.diretorio), \
+                    Anydesk(self.diretorio), \
+                    Googlechrome(self.diretorio), \
+                    Firefox(self.diretorio), \
+                    Sisbrinstall(self.diretorio),
+                    Citrixinstall(self.diretorio),
+                    Sicoobnetinstall(self.diretorio)               
+                    ]
     
     def configurar(self):
         for program in self.lista:
             program.configurar()
+
+
+class Sisbrinstall():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Instalação do Sisbr 2.0"
+        self.definicao = "sisbr20install"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        createdirarcom(self.diretorio)
+        print("Baixando sisbr 2.0")
+        if not os.path.isfile(self.diretorio + "\\sisbr2.0.exe"):
+            file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
+            destination = self.diretorio + '\\sisbr2.0.exe'
+            download_file_from_google_drive(file_id, destination)
+            print("Download finalizado")
+        print("Executando instalacao")
+        subprocess.call(self.diretorio + "\\sisbr2.0.exe")
+
+
+class Citrixinstall():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Instalação do Citrix 10"
+        self.definicao = "citrix10"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        createdirarcom(self.diretorio)
+        diretoriocitrix = self.diretorio + "\\Citrix"
+        criardiretorio(diretoriocitrix)
+        print("Baixando citrix 10")
+        if not os.path.isfile(self.diretorio + "\\Citrix10.zip"):
+            file_id = '19o1eGqGL6xR1B9b3VYunea4zzYe3Heb9'
+            destination = self.diretorio + '\\Citrix10.zip'
+            download_file_from_google_drive(file_id, destination)
+            print("Download finalizado")
+        print("Executando descompacação")
+        with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
+            citrixzip.extractall(diretoriocitrix)
+        subprocess.call('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
+
+
+class Sicoobnetinstall():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Instalação do SicoobNet"
+        self.definicao = "sicoobnet"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        createdirarcom(self.diretorio)
+        if not os.path.isfile(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe"):
+            print("Baixando Sicoobnet Empresarial")
+            urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
+            download = requests.get(urlsicoobnet, allow_redirects=True)
+            open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
+        subprocess.call(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
 class Spark():
