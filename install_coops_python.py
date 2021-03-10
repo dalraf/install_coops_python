@@ -32,8 +32,8 @@ def mudarestadocamposdominio(window,estado):
     pass
 
 #Função para adicionar no domínio
-def addtodomain(dominio,usuario,password):
-    adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{password}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{user}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
+def addtodomain(dominio,usuario,senha):
+    adddomaincommand = f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" $domain = "{dominio}";$password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = "$domain\{usuario}";$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential'
     subprocess.call(adddomaincommand) 
 
 #Configura spark
@@ -135,7 +135,7 @@ def executarscripts(values):
         subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
     
     if values['adicionaraodominio']:
-        addtodomain(values['dominio'],values['usuario'],values['password'])
+        addtodomain(values['dominio'],values['usuario'],values['senha'])
     
     if values['limpezageral']:
         if os.path.exists(diretorioarcom):
