@@ -151,7 +151,7 @@ def executarscripts(values):
         print("Executando descompacação")
         with zipfile.ZipFile(diretorioarcom + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
-        subprocess.call('msiexec /i ' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi')
+        subprocess.call('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"', shell=True)
     
     if values[varcitrixcleanup]:
         print("Removendo registro")
