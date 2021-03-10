@@ -11,7 +11,6 @@ def mudarestadocamposdominio(window,estado):
     window['dominio'].update(disabled = not estado)
     window['usuario'].update(disabled = not estado)
     window['senha'].update(disabled = not estado)
-    pass
 
 #Função para adicionar no domínio
 def addtodomain(dominio,usuario,senha):

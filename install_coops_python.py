@@ -18,6 +18,7 @@ def executarscripts(values,executor):
 
     executor = Executor(values[executor.diretorioarcom.definicao])
 
+
     for program in executor.allprograms.lista:
         if values[program.definicao]:
             program.configurar()
@@ -26,8 +27,12 @@ def executarscripts(values,executor):
         if values[configuracao.definicao]:
             configuracao.configurar()
        
-    if values[varadicionarodominio]:
-        addtodomain(values[vardominio],values[varusuario],values[varsenha])
+    if values[executor.adicionaraodominio.definicao]:
+        executor.adicionaraodominio.configurar(values[executor.adicionaraodominio.dominio.definicao], \
+                                                values[executor.adicionaraodominio.usuario.definicao], \
+                                                values[executor.adicionaraodominio.senha.definicao]
+                                                )
+
 
 
 
@@ -50,10 +55,10 @@ def Menu():
             ]
 
     dominio = [
-            [sg.Checkbox('Adicionar ao domínio', key=varadicionarodominio, size=(24, 1), enable_events=True)],
-            [sg.Text('Domínio: '),sg.Input('',key=vardominio, background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
-            [sg.Text('Usuário:  '),sg.Input('',key=varusuario, background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
-            [sg.Text('Senha:    '),sg.Input('',key=varsenha, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Checkbox(executor.adicionaraodominio.descricao, key=executor.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
+            [sg.Text(executor.adicionaraodominio.dominio.descricao),sg.Input('',key=executor.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
+            [sg.Text(executor.adicionaraodominio.usuario.descricao),sg.Input('',key=executor.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text(executor.adicionaraodominio.senha.descricao,sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
             [sg.Text(executor.diretorioarcom.descricao),sg.Input(executor.diretorioarcom.diretorio,key=executor.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],

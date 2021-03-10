@@ -22,6 +22,7 @@ class Executor():
         self.citrixcleanup = Citrixcleanup(self.diretorioarcom.diretorio)
         self.limpezageral = Limpezageral(self.diretorioarcom.diretorio)
         self.reniciar = Reniciar(self.diretorioarcom.diretorio)
+        self.adicionaraodominio = Adicionaraodominio(self.diretorioarcom.diretorio)
 
 class Diretorioarcom():
 
@@ -44,6 +45,36 @@ class Allconfiguration():
     def configurar(self):
         for configuracao in self.lista:
             configuracao.configurar()
+
+class Dominio():
+    def __init__(self)
+        self.descricao = "Domínio:"
+        self.definicao = 'dominio'
+        self.valor = ""
+
+class Usuario():
+    def __init__(self)
+        self.descricao = "Usuario: "
+        self.definicao = 'usuario'
+        self.valor = ""
+
+class Senha():
+    def __init__(self)
+        self.descricao = "Senha: "
+        self.definicao = 'senha'
+        self.valor = ""
+
+class Adicionaraodominio():
+    def __init__(self):
+        self.dominio = Dominio()
+        self.usuario = Usuario()
+        self.senha = Senha()
+        self.descricao = "Adicionar ao domínio"
+        self.definicao = "addtodomain"
+    
+    def configurar(self):
+        print("Adicionando ao domínio")
+        addtodomain(self.dominio.valor,self.usuario.valor,self.senha.valor)
 
 
 class Citrixcleanup():
