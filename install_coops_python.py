@@ -25,8 +25,10 @@ programas = {
             }
 
 #Alterar campos do domínio
-def mudarestadocamposdominio(window):
-    print("oi")
+def mudarestadocamposdominio(window,estado):
+    window['dominio'].update(disabled = not estado)
+    window['usuario'].update(disabled = not estado)
+    window['senha'].update(disabled = not estado)
     pass
 
 #Função para adicionar no domínio
@@ -132,7 +134,7 @@ def executarscripts(values):
             open(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
         subprocess.call(diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
     
-    if values['adicionaraocominio']:
+    if values['adicionaraodominio']:
         addtodomain(values['dominio'],values['usuario'],values['password'])
     
     if values['limpezageral']:
@@ -152,9 +154,6 @@ def Menu():
     for descricao, comando in programas.items():
         listainstalacao.append([sg.Checkbox('Instalar ' + descricao, key=comando, size=(24, 1))])
 
-    diretorio = [
-            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1))],
-            ]
 
     instalacao = [
             [sg.Checkbox('Instalar programas padrão', key='programsinstall', size=(24, 1))],
@@ -162,12 +161,13 @@ def Menu():
             [sg.Checkbox('Instalar SicoobNet empresarial', key='sicoobnetinstall', size=(24, 1))],
             ]
     dominio = [
-            [sg.Checkbox('Adicionar ao domínio', key='adicionaraocominio', size=(24, 1), enable_events=True)],
-            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
-            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1), disabled=True)],
-            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'light gray', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Checkbox('Adicionar ao domínio', key='adicionaraodominio', size=(24, 1), enable_events=True)],
+            [sg.Text('Domínio: '),sg.Input('',key='dominio', background_color = 'white', border_width = 1, justification='left', size=(12, 1) , disabled=True)],
+            [sg.Text('Usuário:  '),sg.Input('',key='usuario', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
+            [sg.Text('Senha:    '),sg.Input('',key='senha', password_char='*', background_color = 'white', border_width = 1, justification='left', size=(12, 1), disabled=True)],
             ]
     configuracao = [
+            [sg.Text('Diretório Arcom:'),sg.Input(diretorioarcomdefault,key='diretorioarcom', background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
             [sg.Checkbox('Remover registro do Citrix', key='citrixcleanup', size=(24, 1))],
             [sg.Checkbox('Limpeza do diretório Arcom', key='limpezageral', size=(24, 1))],
             [sg.Checkbox('Reniciar cpu após execuçào', key='reiniciar', size=(24, 1))],
@@ -182,8 +182,8 @@ def Menu():
     while True:
         event, values = window.read()
 
-        if event == 'Adicionar ao domínio':
-            mudarestadocamposdominio(window)
+        if event == 'adicionaraodominio':
+            mudarestadocamposdominio(window,values['adicionaraodominio'])
 
         if event == 'Executar':
             executarscripts(values)
