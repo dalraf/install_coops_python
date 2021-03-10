@@ -31,12 +31,13 @@ DisableHostnameVerification=true
 """
 
 programas = {
-            "Adobe Reader":"adobereader", 
-            "Java" : "javaruntime --x86SteamSteam", 
-            "Spark": "spark", 
+            "Adobe Reader":"adobereader",
+            "Adobe Air": "adobeair",
+            "Java" : "javaruntime --x86SteamSteam",
+            "Spark": "spark",
             "Teamviewer": "teamviewer",
-            "Anydesk": "anydesk.install", 
-            "Google Chrome": "googlechrome" , 
+            "Anydesk": "anydesk.install",
+            "Google Chrome": "googlechrome" ,
             "Firefox": "firefox"
             }
 
