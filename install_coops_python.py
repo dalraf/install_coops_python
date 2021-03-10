@@ -6,7 +6,7 @@ import os
 import shutil
 import zipfile
 
-varprogramasinstall = 'programsinstall'
+varprogramasinstall = 'programasinstall'
 varspark = 'spark'
 varsisbrinstall = 'sisbrinstall'
 varcitrixinstall = 'citrixinstall'
@@ -119,12 +119,12 @@ def executarscripts(values):
             print("Instalando " + descricao )
             installprograma(diretorioarcom,comando)
     
-    if values[programasinstall]:
+    if values[varprogramasinstall]:
         print("Executando instalacao de todos os programas")
         for descricao, comando in programas.items():
                 installprograma(diretorioarcom,comando)
 
-    if values[spark]:
+    if values[varspark]:
         configurespark()
     
     if values[varsisbrinstall]:
