@@ -1,12 +1,7 @@
 #!/usr/bin/env python
 import PySimpleGUI as sg
-import subprocess
-import requests
-import os
-import shutil
-import zipfile
 from executors import Executor
-from vars import *
+
 
 executor = Executor("c:\\Arcom")
 

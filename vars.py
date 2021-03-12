@@ -1,19 +1,4 @@
-varprogramasinstall = 'programasinstall'
-varspark = 'spark'
-varsisbrinstall = 'sisbrinstall'
-varcitrixinstall = 'citrixinstall'
-varcitrixcleanup = 'citrixcleanup'
-varsicoobnetinstall = 'sicoobnetinstall'
-varadicionarodominio = 'adicionaraodominio'
-varlimpezageral = 'limpezageral'
-varlimpezageral = 'limpezageral'
-varreniciar = 'varreiniciar'
-vardiretorioarcom = 'diretorioarcom'
-vardominio = 'dominio'
-varusuario = 'usuario'
-varsenha = 'senha'
 
-diretorioarcomdefault = "c:\\Arcom"
 chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
 
 filestringspark= """passwordSaved=true
