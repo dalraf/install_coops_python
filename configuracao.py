@@ -2,19 +2,6 @@ from vars import *
 from functions import *
 
 
-class Allconfiguration():
-
-    def __init__(self,diretorio):
-        self.diretorio = diretorio
-        self.lista  = [Citrixcleanup(self.diretorio), \
-                       Limpezageral(self.diretorio), \
-                       Reniciar(self.diretorio),
-                    ]
-    
-    def configurar(self):
-        for configuracao in self.lista:
-            configuracao.configurar()
-
 class Dominio():
     def __init__(self):
         self.descricao = "Domínio:"

@@ -1,37 +1,37 @@
 #!/usr/bin/env python
 import PySimpleGUI as sg
-from executors import Executor
+from principal import Principal
 
 
-executor = Executor("c:\\Arcom")
+principal = Principal("c:\\Arcom")
 
 #Alterar campos do domínio
 def mudarestadocamposdominio(window,estado):
-    window[executor.adicionaraodominio.dominio.definicao].update(disabled = not estado)
-    window[executor.adicionaraodominio.usuario.definicao].update(disabled = not estado)
-    window[executor.adicionaraodominio.senha.definicao].update(disabled = not estado)
+    window[principal.configuracoes.adicionaraodominio.dominio.definicao].update(disabled = not estado)
+    window[principal.configuracoes.adicionaraodominio.usuario.definicao].update(disabled = not estado)
+    window[principal.configuracoes.adicionaraodominio.senha.definicao].update(disabled = not estado)
 
 
 
 #Função que é executada de acordo com o retorno do valor do GUI
-def executarscripts(values,executor):
+def executarscripts(values,principal):
 
 
-    executor = Executor(values[executor.diretorioarcom.definicao])
+    principal = Principal(values[principal.diretorioarcom.definicao])
 
 
-    for program in executor.allprograms.lista:
-        if values[program.definicao]:
-            program.configurar()
+    for programa in principal.programas.lista():
+        if values[programa.definicao]:
+            programa.configurar()
     
-    for configuracao in executor.allcconfiguracao.lista:
+    for configuracao in principal.configuracoes.lista():
         if values[configuracao.definicao]:
             configuracao.configurar()
        
-    if values[executor.adicionaraodominio.definicao]:
-        executor.adicionaraodominio.configurar(values[executor.adicionaraodominio.dominio.definicao], \
-                                                values[executor.adicionaraodominio.usuario.definicao], \
-                                                values[executor.adicionaraodominio.senha.definicao]
+    if values[principal.configuracoes.adicionaraodominio.definicao]:
+        principal.configuracaoes.adicionaraodominio.configurar(values[principal.configuracoes.adicionaraodominio.dominio.definicao], \
+                                                values[principal.configuracoes.adicionaraodominio.usuario.definicao], \
+                                                values[principal.configuracoes.adicionaraodominio.senha.definicao]
                                                 )
 
 
@@ -45,24 +45,25 @@ def Menu():
     listainstalacao = []
     listaconfiguracao = []
 
-    for program in executor.allprograms.lista:
-        listainstalacao.append([sg.Checkbox(program.descricao , key=program.definicao, size=(24, 1))])
+    for programa in principal.programas.lista():
+        print(programa)
+        listainstalacao.append([sg.Checkbox(programa.descricao , key=programa.definicao, size=(24, 1))])
 
-    for configuracao in executor.allcconfiguracao.lista:
+    for configuracao in principal.configuracoes.lista():
         listaconfiguracao.append([sg.Checkbox(configuracao.descricao , key=configuracao.definicao, size=(24, 1))])
 
     instalacao = [
-            [sg.Checkbox(executor.allprograms.descricao, key=executor.allprograms.descricao, size=(24, 1))],
+            [sg.Checkbox(principal.programas.descricao, key=principal.programas.descricao, size=(24, 1))],
             ]
 
     dominio = [
-            [sg.Checkbox(executor.adicionaraodominio.descricao, key=executor.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
-            [sg.Text(executor.adicionaraodominio.dominio.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1) , disabled=True)],
-            [sg.Text(executor.adicionaraodominio.usuario.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
-            [sg.Text(executor.adicionaraodominio.senha.descricao, justification='left', size=(9, 1)),sg.Input('',key=executor.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Checkbox(principal.configuracoes.adicionaraodominio.descricao, key=principal.configuracoes.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
+            [sg.Text(principal.configuracoes.adicionaraodominio.dominio.descricao, justification='left', size=(9, 1)),sg.Input('',key=principal.configuracoes.adicionaraodominio.dominio.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1) , disabled=True)],
+            [sg.Text(principal.configuracoes.adicionaraodominio.usuario.descricao, justification='left', size=(9, 1)),sg.Input('',key=principal.configuracoes.adicionaraodominio.usuario.definicao, background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Text(principal.configuracoes.adicionaraodominio.senha.descricao, justification='left', size=(9, 1)),sg.Input('',key=principal.configuracoes.adicionaraodominio.senha.definicao, password_char='*', background_color = 'white', border_width = 1, justification='left', size=(15, 1), disabled=True)],
             ]
     configuracao = [
-            [sg.Text(executor.diretorioarcom.descricao),sg.Input(executor.diretorioarcom.diretorio,key=executor.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
+            [sg.Text(principal.diretorioarcom.descricao),sg.Input(principal.diretorioarcom.diretorio,key=principal.diretorioarcom.definicao, background_color = 'white', border_width = 1, justification='left', size=(12, 1))],
             [sg.Frame('Domínio:', dominio , font='Any 12', title_color='black')],
              ]
 
@@ -74,11 +75,11 @@ def Menu():
     while True:
         event, values = window.read()
 
-        if event == executor.adicionaraodominio.definicao:
-            mudarestadocamposdominio(window,values[executor.adicionaraodominio.definicao])
+        if event == principal.configuracoes.adicionaraodominio.definicao:
+            mudarestadocamposdominio(window,values[principal.configuracoes.adicionaraodominio.definicao])
 
         if event == 'Executar':
-            executarscripts(values,executor)
+            executarscripts(values,principal)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break

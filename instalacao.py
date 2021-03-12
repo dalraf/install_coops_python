@@ -1,28 +1,6 @@
 from vars import *
 from functions import *
 
-class Allprograms():
-
-    def __init__(self,diretorio):
-        self.descricao = "Instalação programas padrão"
-        self.definicao = "allprograms"
-        self.diretorio = diretorio
-        self.lista  = [Spark(self.diretorio), \
-                    Adobeair(self.diretorio), \
-                    Java(self.diretorio), \
-                    Teamviewer(self.diretorio), \
-                    Anydesk(self.diretorio), \
-                    Googlechrome(self.diretorio), \
-                    Firefox(self.diretorio), \
-                    Sisbrinstall(self.diretorio),
-                    Citrixinstall(self.diretorio),
-                    Sicoobnetinstall(self.diretorio)               
-                    ]
-    
-    def configurar(self):
-        for program in self.lista:
-            program.configurar()
-
 
 class Sisbrinstall():
     
