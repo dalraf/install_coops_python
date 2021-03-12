@@ -29,7 +29,7 @@ def executarscripts(values,principal):
             configuracao.configurar()
        
     if values[principal.configuracoes.adicionaraodominio.definicao]:
-        principal.configuracaoes.adicionaraodominio.configurar(values[principal.configuracoes.adicionaraodominio.dominio.definicao], \
+        principal.configuracoes.adicionaraodominio.configurar(values[principal.configuracoes.adicionaraodominio.dominio.definicao], \
                                                 values[principal.configuracoes.adicionaraodominio.usuario.definicao], \
                                                 values[principal.configuracoes.adicionaraodominio.senha.definicao]
                                                 )
