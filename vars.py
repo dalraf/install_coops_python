@@ -16,3 +16,5 @@ programas = {
             "Google Chrome": "googlechrome" ,
             "Firefox": "firefox"
             }
+allusersdesktop = "c:\\Users\\Public\\Desktop"
+userdesktop = "%USERPROFILE%\\Desktop"

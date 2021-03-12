@@ -19,6 +19,7 @@ class Sisbrinstall():
             print("Download finalizado")
         print("Executando instalacao")
         subprocess.call(self.diretorio + "\\sisbr2.0.exe")
+        subprocess.call('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop, shell=True)
 
 
 class Citrixinstall():
