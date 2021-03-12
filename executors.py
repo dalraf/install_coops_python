@@ -109,7 +109,7 @@ class Reniciar():
         self.diretorio = diretorio
     
     def configurar(self):
-        subprocess.call("shutdown /t0 /r")
+        subprocess.call("shutdown /t 0 /r")
 
 
 class Allprograms():
