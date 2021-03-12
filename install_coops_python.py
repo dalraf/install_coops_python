@@ -46,7 +46,6 @@ def Menu():
     listaconfiguracao = []
 
     for programa in principal.programas.lista():
-        print(programa)
         listainstalacao.append([sg.Checkbox(programa.descricao , key=programa.definicao, size=(24, 1))])
 
     for configuracao in principal.configuracoes.lista():
