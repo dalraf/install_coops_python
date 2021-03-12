@@ -1,6 +1,24 @@
 from vars import *
 from functions import *
 
+class Caixainstall():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Instalação do caixa"
+        self.definicao = "caixainstall"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        createdirarcom(self.diretorio)
+        print("Baixando o Caixa")
+        if not os.path.isfile(self.diretorio + "\\Setup.jar"):
+            file_id = '1M5SFb5f6z459xNLw7COboxXpH-PrBmqq'
+            destination = self.diretorio + '\\Setup.jar'
+            download_file_from_google_drive(file_id, destination)
+            print("Download finalizado")
+        print("Executando instalacao")
+        subprocess.call('start ' + self.diretorio + "\\Setup.jar")
+        subprocess.call('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop, shell=True)
 
 class Sisbrinstall():
     

@@ -20,6 +20,7 @@ class Programas():
         self.obj_spark = Spark(self.diretorioarcom.diretorio)
         self.obj_adobeair = Adobeair(self.diretorioarcom.diretorio)
         self.obj_java = Java(self.diretorioarcom.diretorio)
+        self.obj_caixa = Caixainstall(self.diretorioarcom.diretorio)
         self.obj_teamviewer = Teamviewer(self.diretorioarcom.diretorio)
         self.obj_anydesk = Anydesk(self.diretorioarcom.diretorio)
         self.obj_googlechrome = Googlechrome(self.diretorioarcom.diretorio)
