@@ -44,15 +44,17 @@ class Configuracoes():
     def __init__(self,diretorio):
         self.diretorioarcom = Diretorioarcom(diretorio)
         self.obj_citrixcleanup = Citrixcleanup(self.diretorioarcom.diretorio)
+        self.adicionaraodominio = Adicionaraodominio(self.diretorioarcom.diretorio)
         self.obj_limpezageral = Limpezageral(self.diretorioarcom.diretorio)
         self.obj_reniciar = Reniciar(self.diretorioarcom.diretorio)
-        self.adicionaraodominio = Adicionaraodominio(self.diretorioarcom.diretorio)
+
     
     def lista(self):
         lista = []
         for configuracao in dir(self):
             if configuracao.startswith('obj_'):
                 lista.append(getattr(self,configuracao))
+        print(lista)
         return lista
 
     

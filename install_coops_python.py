@@ -24,15 +24,17 @@ def executarscripts(values,principal):
         if values[programa.definicao]:
             programa.configurar()
     
+    if values[principal.configuracoes.adicionaraodominio.definicao]:
+        principal.configuracoes.adicionaraodominio.configurar(values[principal.configuracoes.adicionaraodominio.dominio.definicao], \
+                                            values[principal.configuracoes.adicionaraodominio.usuario.definicao], \
+                                            values[principal.configuracoes.adicionaraodominio.senha.definicao]
+                                            )
+
     for configuracao in principal.configuracoes.lista():
         if values[configuracao.definicao]:
             configuracao.configurar()
        
-    if values[principal.configuracoes.adicionaraodominio.definicao]:
-        principal.configuracoes.adicionaraodominio.configurar(values[principal.configuracoes.adicionaraodominio.dominio.definicao], \
-                                                values[principal.configuracoes.adicionaraodominio.usuario.definicao], \
-                                                values[principal.configuracoes.adicionaraodominio.senha.definicao]
-                                                )
+
 
 
 
