@@ -30,7 +30,6 @@ class Programas():
     def lista(self):
         lista = []
         for programa in dir(self):
-            print(type(getattr(self,programa)))
             if programa.startswith('obj_'):
                 lista.append(getattr(self,programa))
         return lista
