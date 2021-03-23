@@ -46,6 +46,8 @@ class Configuracoes():
         self.diretorioarcom = Diretorioarcom(diretorio)
         self.obj_citrixcleanup = Citrixcleanup(self.diretorioarcom.diretorio)
         self.adicionaraodominio = Adicionaraodominio(self.diretorioarcom.diretorio)
+        self.obj_openvpnstart = OpenvpnStart(self.diretorioarcom.diretorio)
+        self.obj_openvpnstop = OpenvpnStop(self.diretorioarcom.diretorio)
         self.obj_limpezageral = Limpezageral(self.diretorioarcom.diretorio)
         self.obj_reniciar = Reniciar(self.diretorioarcom.diretorio)
 

@@ -67,3 +67,27 @@ class Reniciar():
     def configurar(self):
         subprocess.call("shutdown /t 0 /r")
 
+class OpenvpnStart():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Ativar openvpn"
+        self.definicao = "openvpnstart"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        subprocess.call("sc config openvpnservice start=auto")
+        subprocess.call("net start openvpnservice")
+
+class OpenvpnStop():
+    
+    def __init__(self,diretorio):
+        self.descricao = "Desativar openvpn"
+        self.definicao = "openvpnstop"
+        self.diretorio = diretorio
+    
+    def configurar(self):
+        subprocess.call("sc config openvpnservice start=demand")
+        subprocess.call("net stop openvpnservice")
+    
+        
+
