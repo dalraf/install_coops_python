@@ -17,7 +17,8 @@ class Caixainstall():
             download_file_from_google_drive(file_id, destination)
             print("Download finalizado")
         print("Executando instalacao")
-        subprocess.call('start ' + self.diretorio + "\\Setup.jar", shell=True)
+        print('start ' + self.diretorio + "\\Setup.jar")
+        subprocess.call('java -jar ' + self.diretorio + "\\Setup.jar", shell=True)
         subprocess.call('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop, shell=True)
 
 class Sisbrinstall():
