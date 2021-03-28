@@ -1,5 +1,5 @@
 # install_coops_python
 
-Script python para windows para instalação automatizada. v0.2.06
+Script python para windows para instalação automatizada. v0.2.07
 
-[Download da última versão](https://github.com/dalraf/install_coops_python/releases/download/v0.2.06/install_coops_python.exe)
+[Download da última versão](https://github.com/dalraf/install_coops_python/releases/download/v0.2.07/install_coops_python.exe)
