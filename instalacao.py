@@ -17,7 +17,7 @@ class Caixainstall():
             download_file_from_google_drive(file_id, destination)
             print("Download finalizado")
         print("Executando instalacao")
-        subprocess.call('start ' + self.diretorio + "\\Setup.jar")
+        subprocess.call('start ' + self.diretorio + "\\Setup.jar", shell=True)
         subprocess.call('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop, shell=True)
 
 class Sisbrinstall():
@@ -36,7 +36,7 @@ class Sisbrinstall():
             download_file_from_google_drive(file_id, destination)
             print("Download finalizado")
         print("Executando instalacao")
-        subprocess.call(self.diretorio + "\\sisbr2.0.exe")
+        subprocess.call(self.diretorio + "\\sisbr2.0.exe", shell=True)
         subprocess.call('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop, shell=True)
 
 
@@ -60,7 +60,7 @@ class Citrixinstall():
         print("Executando descompacação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
-        subprocess.call('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
+        subprocess.call('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"', shell=True)
 
 
 class Sicoobnetinstall():
@@ -77,7 +77,7 @@ class Sicoobnetinstall():
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
-        subprocess.call(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
+        subprocess.call(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe", shell=True)
 
 
 class Spark():
