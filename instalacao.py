@@ -105,8 +105,16 @@ class Adobeair():
         self.diretorio = diretorio
     
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
-
+        createdirarcom(self.diretorio)
+        print("Baixando Adobe Air")
+        if not os.path.isfile(self.diretorio + "\\adobeair.exe"):
+            file_id = '13fUuPTnwpzIoydnefw9bcdX2h5KbJb0N'
+            destination = self.diretorio + '\\adobeair.exe'
+            download_file_from_google_drive(file_id, destination)
+            print("Download finalizado")
+        print("Executando instalacao")
+        subprocess.call(self.diretorio + "\\adobeair", shell=True)
+ 
 class Java():
 
     def __init__(self,diretorio):
