@@ -4,11 +4,13 @@ import requests
 import os
 import shutil
 import zipfile
+from loguru import logger
 from vars import *
 
+logger.add("file_{time}.log")
 
 def reportar(msg):
-    print(msg)
+    logger.debug(msg)
 
 
 def executar(command):

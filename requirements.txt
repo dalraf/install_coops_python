@@ -1,6 +1,9 @@
 certifi==2020.12.5
 chardet==4.0.0
+colorama==0.4.4
 idna==2.10
+loguru==0.5.3
 PySimpleGUI==4.35.0
 requests==2.25.1
 urllib3==1.26.3
+win32-setctime==1.0.3

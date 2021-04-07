@@ -148,3 +148,4 @@ build
 dist
 Pipfile
 Pipfile.lock
+file*.log
