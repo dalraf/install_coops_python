@@ -44,7 +44,7 @@ class Citrixcleanup():
     
     def configurar(self):
         print("Removendo registro")
-        subprocess.call("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
+        executar("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
 
 class Limpezageral():
     
@@ -65,7 +65,7 @@ class Reniciar():
         self.diretorio = diretorio
     
     def configurar(self):
-        subprocess.call("shutdown /t 0 /r")
+        executar("shutdown /t 0 /r")
 
 class OpenvpnStart():
     
@@ -75,8 +75,8 @@ class OpenvpnStart():
         self.diretorio = diretorio
     
     def configurar(self):
-        subprocess.call("sc config openvpnservice start=auto")
-        subprocess.call("net start openvpnservice")
+        executar("sc config openvpnservice start=auto")
+        executar("net start openvpnservice")
 
 class OpenvpnStop():
     
@@ -86,8 +86,8 @@ class OpenvpnStop():
         self.diretorio = diretorio
     
     def configurar(self):
-        subprocess.call("sc config openvpnservice start=demand")
-        subprocess.call("net stop openvpnservice")
+        executar("sc config openvpnservice start=demand")
+        executar("net stop openvpnservice")
     
         
 

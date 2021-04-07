@@ -7,18 +7,23 @@ import zipfile
 from vars import *
 
 
+def executar(command):
+    process = subprocess.call(command, shell=True)
+    return process
+
+
 #Função para adicionar no domínio
 def addtodomain(dominio,usuario,senha):
-    subprocess.call(f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"$domain = "{dominio}"; $password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = \'{usuario}@$domain\';$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential\"', shell=True)
+    executar(f'@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"$domain = "{dominio}"; $password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = \'{usuario}@$domain\';$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential\"')
  
 
 #Executa instalacao de programas
 def installprograma(diretorioarcom, programa):
     if not os.path.isfile(chocolateypath):
         print("Executando chocolatey")
-        subprocess.call('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"', shell=True)
-    subprocess.call(chocolateypath + " config set cacheLocation " + diretorioarcom, shell=True)
-    subprocess.call(chocolateypath + " install -y " + programa, shell=True)
+        executar('@"%SystemRoot%\System32\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"')
+    executar(chocolateypath + " config set cacheLocation " + diretorioarcom)
+    executar(chocolateypath + " install -y " + programa)
 
 def criardiretorio(diretorio):
     if not os.path.exists(diretorio):

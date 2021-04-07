@@ -27,6 +27,7 @@ class Programas():
         self.obj_firefox = Firefox(self.diretorioarcom.diretorio)
         self.obj_sisbrinstall = Sisbrinstall(self.diretorioarcom.diretorio)
         self.obj_citrix10install = Citrixinstall(self.diretorioarcom.diretorio)
+        self.obj_sicoobnetinstall = Sicoobnetinstall(self.diretorioarcom.diretorio)
 
     def lista(self):
         lista = []
