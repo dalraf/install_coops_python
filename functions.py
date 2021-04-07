@@ -7,7 +7,7 @@ import zipfile
 from loguru import logger
 from vars import *
 
-logger.add("report.log")
+logger.add("INSTALL_COOPS.log")
 
 def reportar(msg):
     logger.debug(msg)
