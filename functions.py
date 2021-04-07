@@ -19,11 +19,12 @@ def executar(command):
     process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
     result, error = process.communicate()
     exitCode = process.wait()
+    errortext = error.decode("cp1252")
     if exitCode > 0:
         if(str(error) == ""):
             error = result
-        logger.debug("Code: " + str(exitCode) + " - Message: " + str(error))
-    logger.debug(result.decode())
+        logger.debug("Code: " + str(exitCode) + " - Message: " + errortext)
+    logger.debug(errortext)
 
 
 
