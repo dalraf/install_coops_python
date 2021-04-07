@@ -7,15 +7,22 @@ import zipfile
 from loguru import logger
 from vars import *
 
-logger.add("file_{time}.log")
+logger.add("report.log")
 
 def reportar(msg):
     logger.debug(msg)
 
 
 def executar(command):
-    process = subprocess.call(command, shell=True)
-    return process
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    result, error = process.communicate()
+    exitCode = process.wait()
+    if exitCode > 0:
+        if(str(error) == ""):
+            error = result
+        logger.debug("Code: " + str(exitCode) + " - Message: " + str(error))
+    logger.debug(result.decode())
+
 
 
 #Função para adicionar no domínio
