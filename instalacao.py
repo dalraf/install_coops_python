@@ -4,7 +4,7 @@ from functions import *
 class Caixainstall():
     
     def __init__(self,diretorio):
-        self.descricao = "Instalação do caixa"
+        self.descricao = "Instalação do Caixa"
         self.definicao = "caixainstall"
         self.diretorio = diretorio
     
