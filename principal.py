@@ -58,7 +58,6 @@ class Configuracoes():
         for configuracao in dir(self):
             if configuracao.startswith('obj_'):
                 lista.append(getattr(self,configuracao))
-        reportar(lista)
         return lista
 
     
