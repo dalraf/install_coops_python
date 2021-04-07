@@ -14,7 +14,9 @@ def reportar(msg):
 
 
 def executar(command):
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     result, error = process.communicate()
     exitCode = process.wait()
     if exitCode > 0:
