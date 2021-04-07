@@ -10,13 +10,13 @@ class Caixainstall():
     
     def configurar(self):
         createdirarcom(self.diretorio)
-        print("Baixando o Caixa")
+        reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorio + "\\Setup.jar"):
             file_id = '1M5SFb5f6z459xNLw7COboxXpH-PrBmqq'
             destination = self.diretorio + '\\Setup.jar'
             download_file_from_google_drive(file_id, destination)
-            print("Download finalizado")
-        print("Executando instalacao")
+            reportar("Download finalizado")
+        reportar("Executando instalacao")
         executar('java -jar ' + self.diretorio + "\\Setup.jar")
         executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
 
@@ -29,13 +29,13 @@ class Sisbrinstall():
     
     def configurar(self):
         createdirarcom(self.diretorio)
-        print("Baixando sisbr 2.0")
+        reportar("Baixando sisbr 2.0")
         if not os.path.isfile(self.diretorio + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
             destination = self.diretorio + '\\sisbr2.0.exe'
             download_file_from_google_drive(file_id, destination)
-            print("Download finalizado")
-        print("Executando instalacao")
+            reportar("Download finalizado")
+        reportar("Executando instalacao")
         executar(self.diretorio + "\\sisbr2.0.exe")
         executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
 
@@ -51,13 +51,13 @@ class Citrixinstall():
         createdirarcom(self.diretorio)
         diretoriocitrix = self.diretorio + "\\Citrix"
         criardiretorio(diretoriocitrix)
-        print("Baixando citrix 10")
+        reportar("Baixando citrix 10")
         if not os.path.isfile(self.diretorio + "\\Citrix10.zip"):
             file_id = '19o1eGqGL6xR1B9b3VYunea4zzYe3Heb9'
             destination = self.diretorio + '\\Citrix10.zip'
             download_file_from_google_drive(file_id, destination)
-            print("Download finalizado")
-        print("Executando descompacação")
+            reportar("Download finalizado")
+        reportar("Executando descompacação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
         executar('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
@@ -73,7 +73,7 @@ class Sicoobnetinstall():
     def configurar(self):
         createdirarcom(self.diretorio)
         if not os.path.isfile(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe"):
-            print("Baixando Sicoobnet Empresarial")
+            reportar("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
@@ -106,13 +106,13 @@ class Adobeair():
     
     def configurar(self):
         createdirarcom(self.diretorio)
-        print("Baixando Adobe Air")
+        reportar("Baixando Adobe Air")
         if not os.path.isfile(self.diretorio + "\\adobeair.exe"):
             file_id = '13fUuPTnwpzIoydnefw9bcdX2h5KbJb0N'
             destination = self.diretorio + '\\adobeair.exe'
             download_file_from_google_drive(file_id, destination)
-            print("Download finalizado")
-        print("Executando instalacao")
+            reportar("Download finalizado")
+        reportar("Executando instalacao")
         executar(self.diretorio + "\\adobeair")
  
 class Java():

@@ -32,7 +32,7 @@ class Adicionaraodominio():
         self.dominio.valor = dominio
         self.usuario.valor = usuario
         self.senha.valor = senha
-        print("Adicionando ao domínio")
+        reportar("Adicionando ao domínio")
         addtodomain(self.dominio.valor,self.usuario.valor,self.senha.valor)
 
 
@@ -43,7 +43,7 @@ class Citrixcleanup():
         self.definicao = "citrixcleanup"
     
     def configurar(self):
-        print("Removendo registro")
+        reportar("Removendo registro")
         executar("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
 
 class Limpezageral():
