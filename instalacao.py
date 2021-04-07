@@ -100,7 +100,7 @@ class Spark():
 class Adobeair():
 
     def __init__(self,diretorio):
-        self.descricao = "Intalação do Adobe Air"
+        self.descricao = "Instalação do Adobe Air"
         self.definicao = "adobeair"
         self.diretorio = diretorio
     
@@ -128,7 +128,7 @@ class Java():
 class Teamviewer():
 
     def __init__(self,diretorio):
-        self.descricao = "Intalação do Teamviewer"
+        self.descricao = "Instalação do Teamviewer"
         self.definicao = "teamviewer"
         self.diretorio = diretorio
     
@@ -139,7 +139,7 @@ class Teamviewer():
 class Anydesk():
 
     def __init__(self,diretorio):
-        self.descricao = "Intalação do Anydesk"
+        self.descricao = "Instalação do Anydesk"
         self.definicao = "anydesk.install"
         self.diretorio = diretorio
 
@@ -150,7 +150,7 @@ class Anydesk():
 class Googlechrome():
 
     def __init__(self,diretorio):
-        self.descricao = "Intalação do Google Chrome"
+        self.descricao = "Instalação do Google Chrome"
         self.definicao = "googlechrome"
         self.diretorio = diretorio
     
@@ -160,7 +160,7 @@ class Googlechrome():
 class Firefox():
 
     def __init__(self,diretorio):
-        self.descricao = "Intalação do Firefox"
+        self.descricao = "Instalação do Firefox"
         self.definicao = "firefox"
         self.diretorio = diretorio
     
