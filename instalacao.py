@@ -62,7 +62,7 @@ class Citrixinstall(Thread_execute):
             destination = self.diretorio + '\\Citrix10.zip'
             download_file_from_google_drive(file_id, destination)
             reportar("Download finalizado")
-        reportar("Executando descompacação")
+        reportar("Executando descompactação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
         reportar("Executando instalação")
