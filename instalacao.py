@@ -1,4 +1,3 @@
-from vars import *
 from functions import *
 
 
