@@ -1,5 +1,5 @@
+from log import error_log
 from functions import *
-
 
 class Dominio():
     def __init__(self):

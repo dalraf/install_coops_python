@@ -1,4 +1,3 @@
-
 chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
 
 filestringspark= """passwordSaved=true

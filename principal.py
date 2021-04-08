@@ -1,3 +1,4 @@
+from log import error_log
 from instalacao import *
 from configuracao import *
 

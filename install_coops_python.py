@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import PySimpleGUI as sg
 from principal import Principal
+from log import error_log
 
 
 principal = Principal("c:\\Arcom")

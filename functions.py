@@ -4,10 +4,12 @@ import requests
 import os
 import shutil
 import zipfile
-from loguru import logger
-from vars import *
 import time
 import threading
+from loguru import logger
+from log import error_log
+from vars import *
+
 
 logger.add("INSTALL_COOPS.log")
 
@@ -24,6 +26,7 @@ class Thread_execute():
 
 def reportar(msg):
     logger.debug(msg)
+    error_log.addlog(msg)
 
 
 def executar(command):
