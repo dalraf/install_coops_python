@@ -84,13 +84,14 @@ def Menu():
 
     def update_log():
         while True:
+            time.sleep(2)
             if error_log.stop_thread:
                 break
-            time.sleep(1)
-            window.write_event_value('log','log')
+            if not error_log.stop_thread:
+                window.write_event_value('log','log')
  
-    processo = threading.Thread(target=update_log, args=())
-    processo.start()
+    processo_log = threading.Thread(target=update_log, args=())
+    processo_log.start()
     
     while True:
         event, values = window.read()
@@ -109,7 +110,7 @@ def Menu():
             break
 
     error_log.stop_thread = True
-    time.sleep(5)
+    time.sleep(2)
     window.close()
 
 
