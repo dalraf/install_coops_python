@@ -40,7 +40,7 @@ class Sisbrinstall(Thread_execute):
             destination = self.diretorio + '\\sisbr2.0.exe'
             download_file_from_google_drive(file_id, destination)
             reportar("Download finalizado")
-        reportar("Executando instalação"")
+        reportar("Executando instalação")
         executar(self.diretorio + "\\sisbr2.0.exe")
         executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
 
