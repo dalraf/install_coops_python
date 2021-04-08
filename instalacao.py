@@ -18,7 +18,7 @@ class Caixainstall(Thread_execute):
             destination = self.diretorio + '\\Setup.jar'
             download_file_from_google_drive(file_id, destination)
             reportar("Download finalizado")
-        reportar("Executando instalacao")
+        reportar("Executando instalação")
         executar('java -jar ' + self.diretorio + "\\Setup.jar")
         executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
 
@@ -40,7 +40,7 @@ class Sisbrinstall(Thread_execute):
             destination = self.diretorio + '\\sisbr2.0.exe'
             download_file_from_google_drive(file_id, destination)
             reportar("Download finalizado")
-        reportar("Executando instalacao")
+        reportar("Executando instalação"")
         executar(self.diretorio + "\\sisbr2.0.exe")
         executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
 
@@ -65,6 +65,7 @@ class Citrixinstall(Thread_execute):
         reportar("Executando descompacação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
+        reportar("Executando instalação")
         executar('msiexec /i "' + diretoriocitrix +
                  '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
@@ -84,6 +85,7 @@ class Sicoobnetinstall(Thread_execute):
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe",
                 'wb').write(download.content)
+        reportar("Executando instalação")
         executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
@@ -120,7 +122,7 @@ class Adobeair(Thread_execute):
             destination = self.diretorio + '\\adobeair.exe'
             download_file_from_google_drive(file_id, destination)
             reportar("Download finalizado")
-        reportar("Executando instalacao")
+        reportar("Executando instalação")
         executar(self.diretorio + "\\adobeair")
 
 

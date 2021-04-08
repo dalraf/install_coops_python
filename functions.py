@@ -43,10 +43,11 @@ def addtodomain(dominio, usuario, senha):
 # Executa instalacao de programas
 def installprograma(diretorioarcom, programa):
     if not os.path.isfile(chocolateypath):
-        reportar("Executando chocolatey")
+        reportar("Executando instalação do chocolatey")
         executar(
             '@"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"')
     executar(chocolateypath + " config set cacheLocation " + diretorioarcom)
+    reportar("Executando instalação")
     executar(chocolateypath + " install -y " + programa)
 
 
