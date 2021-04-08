@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 from principal import Principal
 from log import error_log
 
+error_log.addlog("")
 
 principal = Principal("c:\\Arcom")
 
@@ -75,12 +76,14 @@ def Menu():
     ]
 
     layout = [[sg.Frame('Instalação:', listainstalacao + instalacao, font='Any 12', title_color='black'), sg.Frame('Configuração:',
-                                                                                                                   listaconfiguracao + configuracao, font='Any 12', title_color='black')], [sg.Button('Executar'), sg.Button('Cancelar')]]
+                                                                                                                   listaconfiguracao + configuracao, font='Any 12', title_color='black')], [sg.Button('Executar'), sg.Button('Cancelar'), sg.Input(key='log', background_color='white', border_width=1, justification='left', size=(40, 1), disabled=True)]]
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
 
     while True:
         event, values = window.read()
+        
+        window['log'].update(value=error_log.log[-1])
 
         if event == principal.configuracoes.adicionaraodominio.definicao:
             mudarestadocamposdominio(
