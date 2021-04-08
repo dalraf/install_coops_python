@@ -5,23 +5,12 @@ import os
 import shutil
 import zipfile
 import time
-import threading
 from loguru import logger
 from log import error_log
-from vars import *
+from config import *
 
 
 logger.add("INSTALL_COOPS.log")
-
-
-class Thread_execute():
-
-    def thread_configurar(self):
-        pass
-
-    def configurar(self):
-        processo = threading.Thread(target=self.thread_configurar, args=())
-        processo.start()
 
 
 def reportar(msg):
