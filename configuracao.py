@@ -23,7 +23,7 @@ class Senha():
         self.valor = ""
 
 
-class Adicionaraodominio():
+class Adicionaraodominio(Thread_execute):
     def __init__(self, diretorio):
         self.dominio = Dominio()
         self.usuario = Usuario()
@@ -31,7 +31,7 @@ class Adicionaraodominio():
         self.descricao = "Adicionar ao domínio"
         self.definicao = "addtodomain"
 
-    def configurar(self, dominio, usuario, senha):
+    def thread_configurar(self, dominio, usuario, senha):
         self.dominio.valor = dominio
         self.usuario.valor = usuario
         self.senha.valor = senha
@@ -39,59 +39,59 @@ class Adicionaraodominio():
         addtodomain(self.dominio.valor, self.usuario.valor, self.senha.valor)
 
 
-class Citrixcleanup():
+class Citrixcleanup(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Limpar registro do Citrix"
         self.definicao = "citrixcleanup"
 
-    def configurar(self):
+    def thread_configurar(self):
         reportar("Removendo registro")
         executar("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
 
 
-class Limpezageral():
+class Limpezageral(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Limpar diretório Arcom"
         self.definicao = "limpezageral"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         if os.path.exists(self.diretorio):
             shutil.rmtree(self.diretorio)
 
 
-class Reniciar():
+class Reniciar(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Reniciar cpu após execução"
         self.definicao = "reniciar"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         executar("shutdown /t 0 /r")
 
 
-class OpenvpnStart():
+class OpenvpnStart(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Ativar openvpn"
         self.definicao = "openvpnstart"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         executar("sc config openvpnservice start=auto")
         executar("net start openvpnservice")
 
 
-class OpenvpnStop():
+class OpenvpnStop(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Desativar openvpn"
         self.definicao = "openvpnstop"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         executar("sc config openvpnservice start=demand")
         executar("net stop openvpnservice")

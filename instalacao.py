@@ -2,14 +2,14 @@ from vars import *
 from functions import *
 
 
-class Caixainstall():
+class Caixainstall(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Caixa"
         self.definicao = "caixainstall"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorio + "\\Setup.jar"):
@@ -22,14 +22,16 @@ class Caixainstall():
         executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
 
 
-class Sisbrinstall():
+
+
+class Sisbrinstall(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Sisbr 2.0"
         self.definicao = "sisbr20install"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando sisbr 2.0")
         if not os.path.isfile(self.diretorio + "\\sisbr2.0.exe"):
@@ -42,14 +44,14 @@ class Sisbrinstall():
         executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
 
 
-class Citrixinstall():
+class Citrixinstall(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Citrix 10"
         self.definicao = "citrix10"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         createdirarcom(self.diretorio)
         diretoriocitrix = self.diretorio + "\\Citrix"
         criardiretorio(diretoriocitrix)
@@ -66,32 +68,32 @@ class Citrixinstall():
                  '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
 
-class Sicoobnetinstall():
+class Sicoobnetinstall(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do SicoobNet"
         self.definicao = "sicoobnet"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         createdirarcom(self.diretorio)
         if not os.path.isfile(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe"):
             reportar("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe",
-                 'wb').write(download.content)
+                'wb').write(download.content)
         executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
-class Spark():
+class Spark(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Spark"
         self.definicao = "spark"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
         appdata = os.getenv('APPDATA')
         if not os.path.exists(appdata + '\\Spark'):
@@ -102,14 +104,14 @@ class Spark():
         sparkconf.close()
 
 
-class Adobeair():
+class Adobeair(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Adobe Air"
         self.definicao = "adobeair"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando Adobe Air")
         if not os.path.isfile(self.diretorio + "\\adobeair.exe"):
@@ -121,56 +123,56 @@ class Adobeair():
         executar(self.diretorio + "\\adobeair")
 
 
-class Java():
+class Java(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Java"
         self.definicao = "javaruntime"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
 
 
-class Teamviewer():
+class Teamviewer(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Teamviewer"
         self.definicao = "teamviewer"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
 
 
-class Anydesk():
+class Anydesk(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Anydesk"
         self.definicao = "anydesk.install"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
 
 
-class Googlechrome():
+class Googlechrome(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Google Chrome"
         self.definicao = "googlechrome"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
 
 
-class Firefox():
+class Firefox(Thread_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Firefox"
         self.definicao = "firefox"
         self.diretorio = diretorio
 
-    def configurar(self):
+    def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)

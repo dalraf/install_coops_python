@@ -5,10 +5,21 @@ import os
 import shutil
 import zipfile
 from loguru import logger
-import vars
+from vars import *
+import time
 import threading
 
 logger.add("INSTALL_COOPS.log")
+
+
+class Thread_execute():
+
+    def thread_configurar(self):
+        pass
+
+    def configurar(self):
+        processo = threading.Thread(target=self.thread_configurar, args=())
+        processo.start()
 
 
 def reportar(msg):
@@ -16,21 +27,19 @@ def reportar(msg):
 
 
 def executar(command):
-    def executar_separado(command):
-        startupinfo = subprocess.STARTUPINFO()
-        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE,
-                                   stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
-        result, error = process.communicate()
-        exitCode = process.wait()
-        errortext = error.decode("cp1252")
-        if exitCode > 0:
-            if(str(error) == ""):
-                error = result
-            logger.debug("Code: " + str(exitCode) + " - Message: " + errortext)
-        logger.debug(errortext)
-    processo = threading.Thread(target=executar_separado, args=(command,))
-    processo.start()
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
+    result, error = process.communicate()
+    exitCode = process.wait()
+    errortext = error.decode("cp1252")
+    if exitCode > 0:
+        if(str(error) == ""):
+            error = result
+        logger.debug("Code: " + str(exitCode) + " - Message: " + errortext)
+    logger.debug(errortext)
+
 
 
 # Função para adicionar no domínio
