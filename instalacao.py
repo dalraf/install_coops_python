@@ -1,13 +1,14 @@
 from vars import *
 from functions import *
 
+
 class Caixainstall():
-    
-    def __init__(self,diretorio):
+
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Caixa"
         self.definicao = "caixainstall"
         self.diretorio = diretorio
-    
+
     def configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando o Caixa")
@@ -20,13 +21,14 @@ class Caixainstall():
         executar('java -jar ' + self.diretorio + "\\Setup.jar")
         executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
 
+
 class Sisbrinstall():
-    
-    def __init__(self,diretorio):
+
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Sisbr 2.0"
         self.definicao = "sisbr20install"
         self.diretorio = diretorio
-    
+
     def configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando sisbr 2.0")
@@ -41,12 +43,12 @@ class Sisbrinstall():
 
 
 class Citrixinstall():
-    
-    def __init__(self,diretorio):
+
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Citrix 10"
         self.definicao = "citrix10"
         self.diretorio = diretorio
-    
+
     def configurar(self):
         createdirarcom(self.diretorio)
         diretoriocitrix = self.diretorio + "\\Citrix"
@@ -60,35 +62,37 @@ class Citrixinstall():
         reportar("Executando descompacação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(diretoriocitrix)
-        executar('msiexec /i "' + diretoriocitrix + '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
+        executar('msiexec /i "' + diretoriocitrix +
+                 '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
 
 class Sicoobnetinstall():
-    
-    def __init__(self,diretorio):
+
+    def __init__(self, diretorio):
         self.descricao = "Instalação do SicoobNet"
         self.definicao = "sicoobnet"
         self.diretorio = diretorio
-    
+
     def configurar(self):
         createdirarcom(self.diretorio)
         if not os.path.isfile(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe"):
             reportar("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
-            open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe", 'wb').write(download.content)
+            open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe",
+                 'wb').write(download.content)
         executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
 class Spark():
-    
-    def __init__(self,diretorio):
+
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Spark"
         self.definicao = "spark"
         self.diretorio = diretorio
 
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
+        installprograma(self.diretorio, self.definicao)
         appdata = os.getenv('APPDATA')
         if not os.path.exists(appdata + '\\Spark'):
             os.mkdir(appdata + '\\Spark')
@@ -97,13 +101,14 @@ class Spark():
             sparkconf.write(filestringspark)
         sparkconf.close()
 
+
 class Adobeair():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Adobe Air"
         self.definicao = "adobeair"
         self.diretorio = diretorio
-    
+
     def configurar(self):
         createdirarcom(self.diretorio)
         reportar("Baixando Adobe Air")
@@ -114,55 +119,58 @@ class Adobeair():
             reportar("Download finalizado")
         reportar("Executando instalacao")
         executar(self.diretorio + "\\adobeair")
- 
+
+
 class Java():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Java"
         self.definicao = "javaruntime"
         self.diretorio = diretorio
-    
+
     def configurar(self):
-        installprograma(self.diretorio,'javaruntime --x86SteamSteam')
+        installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
+
 
 class Teamviewer():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Teamviewer"
         self.definicao = "teamviewer"
         self.diretorio = diretorio
-    
+
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
+        installprograma(self.diretorio, self.definicao)
 
 
 class Anydesk():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Anydesk"
         self.definicao = "anydesk.install"
         self.diretorio = diretorio
 
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
+        installprograma(self.diretorio, self.definicao)
 
 
 class Googlechrome():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Google Chrome"
         self.definicao = "googlechrome"
         self.diretorio = diretorio
-    
+
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
+        installprograma(self.diretorio, self.definicao)
+
 
 class Firefox():
 
-    def __init__(self,diretorio):
+    def __init__(self, diretorio):
         self.descricao = "Instalação do Firefox"
         self.definicao = "firefox"
         self.diretorio = diretorio
-    
+
     def configurar(self):
-        installprograma(self.diretorio,self.definicao)
+        installprograma(self.diretorio, self.definicao)
