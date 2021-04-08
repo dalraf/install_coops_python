@@ -2,6 +2,8 @@
 import PySimpleGUI as sg
 from principal import Principal
 from log import error_log
+import time
+import threading
 
 error_log.addlog("")
 
@@ -80,10 +82,21 @@ def Menu():
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
 
+    def update_log():
+        while True:
+            if error_log.stop_thread:
+                break
+            time.sleep(1)
+            window.write_event_value('log','log')
+ 
+    processo = threading.Thread(target=update_log, args=())
+    processo.start()
+    
     while True:
         event, values = window.read()
-        
-        window['log'].update(value=error_log.log[-1])
+
+        if event == 'log':
+            window['log'].update(value=error_log.log[-1])
 
         if event == principal.configuracoes.adicionaraodominio.definicao:
             mudarestadocamposdominio(
@@ -95,6 +108,8 @@ def Menu():
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
 
+    error_log.stop_thread = True
+    time.sleep(5)
     window.close()
 
 
