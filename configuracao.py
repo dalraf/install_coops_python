@@ -58,6 +58,7 @@ class Limpezageral(Thread_execute):
         self.diretorio = diretorio
 
     def thread_configurar(self):
+        reportar("Removendo " + self.diretorio)
         if os.path.exists(self.diretorio):
             shutil.rmtree(self.diretorio)
 
@@ -70,6 +71,7 @@ class Reniciar(Thread_execute):
         self.diretorio = diretorio
 
     def thread_configurar(self):
+        reportar("Reiniciando...")
         executar("shutdown /t 0 /r")
 
 
@@ -81,6 +83,7 @@ class OpenvpnStart(Thread_execute):
         self.diretorio = diretorio
 
     def thread_configurar(self):
+        reportar("Iniciando Openvpn")
         executar("sc config openvpnservice start=auto")
         executar("net start openvpnservice")
 
@@ -93,5 +96,6 @@ class OpenvpnStop(Thread_execute):
         self.diretorio = diretorio
 
     def thread_configurar(self):
+        reportar("Parando Openvpn")
         executar("sc config openvpnservice start=demand")
         executar("net stop openvpnservice")
