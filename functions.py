@@ -37,8 +37,8 @@ def executar(command):
     if exitCode > 0:
         if(str(error) == ""):
             error = result
-        logger.debug("Code: " + str(exitCode) + " - Message: " + errortext)
-    logger.debug(errortext)
+        reportar("Code: " + str(exitCode) + " - Message: " + errortext)
+    reportar(errortext)
 
 
 
