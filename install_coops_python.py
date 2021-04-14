@@ -26,7 +26,7 @@ def executarscripts(values, principal):
 
     principal = Principal(values[principal.diretorioarcom.definicao])
 
-    for programa in principal.programas.lista():
+    for programa in principal.programas.lista:
         if values[programa.definicao]:
             programa.configurar()
 
@@ -36,7 +36,7 @@ def executarscripts(values, principal):
                                                               values[principal.configuracoes.adicionaraodominio.senha.definicao]
                                                               )
 
-    for configuracao in principal.configuracoes.lista():
+    for configuracao in principal.configuracoes.lista:
         if values[configuracao.definicao]:
             configuracao.configurar()
 
@@ -48,11 +48,11 @@ def Menu():
     listainstalacao = []
     listaconfiguracao = []
 
-    for programa in principal.programas.lista():
+    for programa in principal.programas.lista:
         listainstalacao.append(
             [sg.Checkbox(programa.descricao, key=programa.definicao, size=(24, 1))])
 
-    for configuracao in principal.configuracoes.lista():
+    for configuracao in principal.configuracoes.lista:
         listaconfiguracao.append(
             [sg.Checkbox(configuracao.descricao, key=configuracao.definicao, size=(24, 1))])
 
