@@ -44,17 +44,11 @@ def Menu():
         if event == 'log':
             window['log'].update(value=error_log.log[-1])
 
-        for programa in principal.programas.lista:
-            if values[programa.definicao]:
-                programa.change_gui(window, values)
+        for objeto in principal.programas.lista + principal.configuracoes.lista:
+            if values[objeto.definicao]:
+                objeto.change_gui(window, values)
                 if event == 'Executar':
-                    programa.configurar(window, values)
-
-        for configuracao in principal.configuracoes.lista:
-            if values[configuracao.definicao]:
-                configuracao.change_gui(window, values)
-                if event == 'Executar':
-                    configuracao.configurar(window, values)
+                    objeto.configurar(window, values)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
