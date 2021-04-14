@@ -25,7 +25,7 @@ class Senha():
 
 
 class Adicionaraodominio(Object_execute):
-    def __init__(self, diretorio):
+    def __init__(self):
         self.dominio = Dominio()
         self.usuario = Usuario()
         self.senha = Senha()
@@ -64,7 +64,7 @@ class Adicionaraodominio(Object_execute):
 
 class Citrixcleanup(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Limpar registro do Citrix"
         self.definicao = "citrixcleanup"
 
@@ -75,10 +75,9 @@ class Citrixcleanup(Object_execute):
 
 class Limpezageral(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Limpar diretório Arcom"
         self.definicao = "limpezageral"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         reportar("Removendo " + self.diretorio)
@@ -88,10 +87,9 @@ class Limpezageral(Object_execute):
 
 class Reniciar(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Reniciar cpu após execução"
         self.definicao = "reniciar"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         reportar("Reiniciando...")
@@ -100,10 +98,9 @@ class Reniciar(Object_execute):
 
 class OpenvpnStart(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Ativar openvpn"
         self.definicao = "openvpnstart"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         reportar("Iniciando Openvpn")
@@ -113,10 +110,9 @@ class OpenvpnStart(Object_execute):
 
 class OpenvpnStop(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Desativar openvpn"
         self.definicao = "openvpnstop"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         reportar("Parando Openvpn")

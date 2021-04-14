@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import threading
+from config import diretorioarcom
 
 class Object_execute():
 
@@ -14,6 +15,7 @@ class Object_execute():
         pass
 
     def configurar(self, window, values):
+        self.diretorio = diretorioarcom
         self.change_gui(window, values)
         processo = threading.Thread(target=self.thread_configurar, args=())
         processo.start()

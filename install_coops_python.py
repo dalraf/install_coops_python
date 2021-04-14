@@ -7,7 +7,7 @@ import threading
 
 error_log.addlog("")
 
-principal = Principal("c:\\Arcom")
+principal = Principal()
 
 # Funcao que gera o a GUI
 def Menu():

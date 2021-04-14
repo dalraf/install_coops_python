@@ -1,3 +1,5 @@
+diretorioarcom = "c:\\Arcom"
+
 chocolateypath = "c:\\ProgramData\\chocolatey\choco.exe"
 
 filestringspark= """passwordSaved=true

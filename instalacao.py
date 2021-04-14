@@ -5,10 +5,9 @@ from functions import *
 
 class Caixainstall(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Caixa"
         self.definicao = "caixainstall"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         createdirarcom(self.diretorio)
@@ -27,10 +26,9 @@ class Caixainstall(Object_execute):
 
 class Sisbrinstall(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Sisbr 2.0"
         self.definicao = "sisbr20install"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         createdirarcom(self.diretorio)
@@ -47,10 +45,9 @@ class Sisbrinstall(Object_execute):
 
 class Citrixinstall(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Citrix 10"
         self.definicao = "citrix10"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         createdirarcom(self.diretorio)
@@ -72,10 +69,9 @@ class Citrixinstall(Object_execute):
 
 class Sicoobnetinstall(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do SicoobNet"
         self.definicao = "sicoobnet"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         createdirarcom(self.diretorio)
@@ -91,10 +87,9 @@ class Sicoobnetinstall(Object_execute):
 
 class Spark(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Spark"
         self.definicao = "spark"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
@@ -109,10 +104,9 @@ class Spark(Object_execute):
 
 class Adobeair(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Adobe Air"
         self.definicao = "adobeair"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         createdirarcom(self.diretorio)
@@ -128,10 +122,9 @@ class Adobeair(Object_execute):
 
 class Java(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Java"
         self.definicao = "javaruntime"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
@@ -139,10 +132,9 @@ class Java(Object_execute):
 
 class Teamviewer(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Teamviewer"
         self.definicao = "teamviewer"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
@@ -150,10 +142,9 @@ class Teamviewer(Object_execute):
 
 class Anydesk(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Anydesk"
         self.definicao = "anydesk.install"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
@@ -161,10 +152,9 @@ class Anydesk(Object_execute):
 
 class Googlechrome(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Google Chrome"
         self.definicao = "googlechrome"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)
@@ -172,10 +162,9 @@ class Googlechrome(Object_execute):
 
 class Firefox(Object_execute):
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.descricao = "Instalação do Firefox"
         self.definicao = "firefox"
-        self.diretorio = diretorio
 
     def thread_configurar(self):
         installprograma(self.diretorio, self.definicao)

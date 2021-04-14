@@ -3,44 +3,33 @@ from instalacao import *
 from configuracao import *
 
 
-class Diretorioarcom():
-
-    def __init__(self, diretorio):
-        self.descricao = "Diretório Arcom"
-        self.definicao = "diretorioarcom"
-        self.diretorio = diretorio
-
-
 class Programas():
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.lista = []
-        self.diretorioarcom = Diretorioarcom(diretorio)
-        self.diretorio = diretorio
-        self.lista.append(Spark(self.diretorioarcom.diretorio))
-        self.lista.append(Adobeair(self.diretorioarcom.diretorio))
-        self.lista.append(Java(self.diretorioarcom.diretorio))
-        self.lista.append(Caixainstall(self.diretorioarcom.diretorio))
-        self.lista.append(Teamviewer(self.diretorioarcom.diretorio))
-        self.lista.append(Anydesk(self.diretorioarcom.diretorio))
-        self.lista.append(Googlechrome(self.diretorioarcom.diretorio))
-        self.lista.append(Firefox(self.diretorioarcom.diretorio))
-        self.lista.append(Sisbrinstall(self.diretorioarcom.diretorio))
-        self.lista.append(Citrixinstall(self.diretorioarcom.diretorio))
-        self.lista.append(Sicoobnetinstall(self.diretorioarcom.diretorio))
+        self.lista.append(Spark())
+        self.lista.append(Adobeair())
+        self.lista.append(Java())
+        self.lista.append(Caixainstall())
+        self.lista.append(Teamviewer())
+        self.lista.append(Anydesk())
+        self.lista.append(Googlechrome())
+        self.lista.append(Firefox())
+        self.lista.append(Sisbrinstall())
+        self.lista.append(Citrixinstall())
+        self.lista.append(Sicoobnetinstall())
 
 
 class Configuracoes():
 
-    def __init__(self, diretorio):
+    def __init__(self):
         self.lista = []
-        self.diretorioarcom = Diretorioarcom(diretorio)
-        self.lista.append(Adicionaraodominio(self.diretorioarcom.diretorio))
-        self.lista.append(Citrixcleanup(self.diretorioarcom.diretorio))
-        self.lista.append(OpenvpnStart(self.diretorioarcom.diretorio))
-        self.lista.append(OpenvpnStop(self.diretorioarcom.diretorio))
-        self.lista.append(Limpezageral(self.diretorioarcom.diretorio))
-        self.lista.append(Reniciar(self.diretorioarcom.diretorio))
+        self.lista.append(Adicionaraodominio())
+        self.lista.append(Citrixcleanup())
+        self.lista.append(OpenvpnStart())
+        self.lista.append(OpenvpnStop())
+        self.lista.append(Limpezageral())
+        self.lista.append(Reniciar())
 
     def configurar(self):
         for configuracao in self.lista:
@@ -49,7 +38,6 @@ class Configuracoes():
 
 class Principal():
 
-    def __init__(self, diretorio):
-        self.diretorioarcom = Diretorioarcom(diretorio)
-        self.programas = Programas(self.diretorioarcom.diretorio)
-        self.configuracoes = Configuracoes(self.diretorioarcom.diretorio)
+    def __init__(self):
+        self.programas = Programas()
+        self.configuracoes = Configuracoes()
