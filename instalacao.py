@@ -5,7 +5,7 @@ from functions import *
 
 class Caixainstall(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Caixa"
         self.definicao = "caixainstall"
 
@@ -24,7 +24,7 @@ class Caixainstall(Object_execute):
 
 class Sisbrinstall(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Sisbr 2.0"
         self.definicao = "sisbr20install"
 
@@ -43,7 +43,7 @@ class Sisbrinstall(Object_execute):
 
 class Citrixinstall(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Citrix 10"
         self.definicao = "citrix10"
 
@@ -67,7 +67,7 @@ class Citrixinstall(Object_execute):
 
 class Sicoobnetinstall(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do SicoobNet"
         self.definicao = "sicoobnet"
 
@@ -85,7 +85,7 @@ class Sicoobnetinstall(Object_execute):
 
 class Spark(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Spark"
         self.definicao = "spark"
 
@@ -102,7 +102,7 @@ class Spark(Object_execute):
 
 class Adobeair(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Adobe Air"
         self.definicao = "adobeair"
 
@@ -120,7 +120,7 @@ class Adobeair(Object_execute):
 
 class Java(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Java"
         self.definicao = "javaruntime"
 
@@ -130,7 +130,7 @@ class Java(Object_execute):
 
 class Teamviewer(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Teamviewer"
         self.definicao = "teamviewer"
 
@@ -140,7 +140,7 @@ class Teamviewer(Object_execute):
 
 class Anydesk(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Anydesk"
         self.definicao = "anydesk.install"
 
@@ -150,7 +150,7 @@ class Anydesk(Object_execute):
 
 class Googlechrome(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Google Chrome"
         self.definicao = "googlechrome"
 
@@ -160,7 +160,7 @@ class Googlechrome(Object_execute):
 
 class Firefox(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Instalação do Firefox"
         self.definicao = "firefox"
 

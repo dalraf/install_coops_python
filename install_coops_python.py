@@ -47,10 +47,10 @@ def Menu():
             window['log'].update(value=error_log.log[-1])
 
         for objeto in principal.programas.lista + principal.configuracoes.lista:
-            if values[objeto.definicao]:
-                objeto.change_gui(window, values)
-                if event == 'Executar':
-                    objeto.configurar(window, values)
+            objeto.change_gui(window, values)
+            objeto.verify_thread(window, values)
+            if event == 'Executar' and values[objeto.definicao]:
+                objeto.configurar(window, values)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break

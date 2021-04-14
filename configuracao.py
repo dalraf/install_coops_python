@@ -26,7 +26,7 @@ class Senha():
 
 
 class Adicionaraodominio(Object_execute):
-    def __init__(self):
+    def define_param(self):
         self.dominio = Dominio()
         self.usuario = Usuario()
         self.senha = Senha()
@@ -59,13 +59,14 @@ class Adicionaraodominio(Object_execute):
                 '', key=self.usuario.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
             [sg.Text(self.senha.descricao, justification='left', size=(9, 1)), sg.Input(
                 '', key=self.senha.definicao, password_char='*', background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Text("",key=self.definicao + "status", justification='left', size=(2, 1))]    
         ]
         return [sg.Frame('Domínio:', dominio, font='Any 12', title_color='black')]
 
 
 class Citrixcleanup(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Limpar registro do Citrix"
         self.definicao = "citrixcleanup"
 
@@ -76,7 +77,7 @@ class Citrixcleanup(Object_execute):
 
 class Limpezageral(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Limpar diretório Arcom"
         self.definicao = "limpezageral"
 
@@ -88,7 +89,7 @@ class Limpezageral(Object_execute):
 
 class Reniciar(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Reniciar cpu após execução"
         self.definicao = "reniciar"
 
@@ -99,7 +100,7 @@ class Reniciar(Object_execute):
 
 class OpenvpnStart(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Ativar openvpn"
         self.definicao = "openvpnstart"
 
@@ -111,7 +112,7 @@ class OpenvpnStart(Object_execute):
 
 class OpenvpnStop(Object_execute):
 
-    def __init__(self):
+    def define_param(self):
         self.descricao = "Desativar openvpn"
         self.definicao = "openvpnstop"
 
