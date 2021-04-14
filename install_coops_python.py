@@ -10,6 +10,8 @@ error_log.addlog("")
 principal = Principal()
 
 # Funcao que gera o a GUI
+
+
 def Menu():
     sg.theme('LightBlue')
     sg.SetOptions(text_justification='right')

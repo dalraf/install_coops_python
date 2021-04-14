@@ -22,8 +22,6 @@ class Caixainstall(Object_execute):
         executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
 
 
-
-
 class Sisbrinstall(Object_execute):
 
     def __init__(self):
@@ -80,7 +78,7 @@ class Sicoobnetinstall(Object_execute):
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe",
-                'wb').write(download.content)
+                 'wb').write(download.content)
         reportar("Executando instalação")
         executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 

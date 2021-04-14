@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 import threading
 from config import diretorioarcom
 
+
 class Object_execute():
 
     def __init__(self):
@@ -11,7 +12,7 @@ class Object_execute():
     def thread_configurar(self):
         pass
 
-    def change_gui(self,window,values):
+    def change_gui(self, window, values):
         pass
 
     def configurar(self, window, values):

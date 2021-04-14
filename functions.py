@@ -22,7 +22,7 @@ def executar(command):
     startupinfo = subprocess.STARTUPINFO()
     startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
+                               stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
     result, error = process.communicate()
     exitCode = process.wait()
     errortext = error.decode("cp1252")
@@ -31,7 +31,6 @@ def executar(command):
             error = result
         reportar("Code: " + str(exitCode) + " - Message: " + errortext)
     reportar(errortext)
-
 
 
 # Função para adicionar no domínio

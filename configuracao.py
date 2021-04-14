@@ -3,6 +3,7 @@ from log import error_log
 from classes import Object_execute
 from functions import *
 
+
 class Dominio():
     def __init__(self):
         self.descricao = "Domínio:"
@@ -50,14 +51,14 @@ class Adicionaraodominio(Object_execute):
 
     def gui(self):
         dominio = [
-        [sg.Checkbox(self.descricao,
-                     key=self.definicao, size=(24, 1), enable_events=True)],
-        [sg.Text(self.dominio.descricao, justification='left', size=(9, 1)), sg.Input(
-            '', key=self.dominio.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
-        [sg.Text(self.usuario.descricao, justification='left', size=(9, 1)), sg.Input(
-            '', key=self.usuario.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
-        [sg.Text(self.senha.descricao, justification='left', size=(9, 1)), sg.Input(
-            '', key=self.senha.definicao, password_char='*', background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Checkbox(self.descricao,
+                         key=self.definicao, size=(24, 1), enable_events=True)],
+            [sg.Text(self.dominio.descricao, justification='left', size=(9, 1)), sg.Input(
+                '', key=self.dominio.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Text(self.usuario.descricao, justification='left', size=(9, 1)), sg.Input(
+                '', key=self.usuario.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+            [sg.Text(self.senha.descricao, justification='left', size=(9, 1)), sg.Input(
+                '', key=self.senha.definicao, password_char='*', background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
         ]
         return [sg.Frame('Domínio:', dominio, font='Any 12', title_color='black')]
 
