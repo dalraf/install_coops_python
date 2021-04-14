@@ -15,8 +15,6 @@ class Programas():
 
     def __init__(self, diretorio):
         self.diretorioarcom = Diretorioarcom(diretorio)
-        self.descricao = "Instalação programas padrão"
-        self.definicao = "allprograms"
         self.diretorio = diretorio
         self.obj_spark = Spark(self.diretorioarcom.diretorio)
         self.obj_adobeair = Adobeair(self.diretorioarcom.diretorio)
@@ -38,9 +36,6 @@ class Programas():
                 lista.append(getattr(self, programa))
         return lista
 
-    def configurar(self):
-        for program in self.lista():
-            program.configurar()
 
 
 class Configuracoes():

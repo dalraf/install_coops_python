@@ -56,11 +56,6 @@ def Menu():
         listaconfiguracao.append(
             [sg.Checkbox(configuracao.descricao, key=configuracao.definicao, size=(24, 1))])
 
-    instalacao = [
-        [sg.Checkbox(principal.programas.descricao,
-                     key=principal.programas.descricao, size=(24, 1))],
-    ]
-
     dominio = [
         [sg.Checkbox(principal.configuracoes.adicionaraodominio.descricao,
                      key=principal.configuracoes.adicionaraodominio.definicao, size=(24, 1), enable_events=True)],
@@ -77,8 +72,8 @@ def Menu():
         [sg.Frame('Domínio:', dominio, font='Any 12', title_color='black')],
     ]
 
-    layout = [[sg.Frame('Instalação:', listainstalacao + instalacao, font='Any 12', title_color='black'), sg.Frame('Configuração:',
-                                                                                                                   listaconfiguracao + configuracao, font='Any 12', title_color='black')], [sg.Button('Executar'), sg.Button('Cancelar'), sg.Input(key='log', background_color='white', border_width=1, justification='left', size=(40, 1), disabled=True)]]
+    layout = [[sg.Frame('Instalação:', listainstalacao, font='Any 12', title_color='black'), sg.Frame('Configuração:',
+                                                                                                      listaconfiguracao + configuracao, font='Any 12', title_color='black')], [sg.Button('Executar'), sg.Button('Cancelar'), sg.Input(key='log', background_color='white', border_width=1, justification='left', size=(40, 1), disabled=True)]]
 
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
 
@@ -88,11 +83,11 @@ def Menu():
             if error_log.stop_thread:
                 break
             if not error_log.stop_thread:
-                window.write_event_value('log','log')
- 
+                window.write_event_value('log', 'log')
+
     processo_log = threading.Thread(target=update_log, args=())
     processo_log.start()
-    
+
     while True:
         event, values = window.read()
 
