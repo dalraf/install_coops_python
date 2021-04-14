@@ -9,19 +9,6 @@ error_log.addlog("")
 
 principal = Principal("c:\\Arcom")
 
-
-# Função que é executada de acordo com o retorno do valor do GUI
-def executarscripts(window, values, principal):
-
-    for programa in principal.programas.lista:
-        if values[programa.definicao]:
-            programa.configurar(window, values)
-
-    for configuracao in principal.configuracoes.lista:
-        if values[configuracao.definicao]:
-            configuracao.configurar(window, values)
-
-
 # Funcao que gera o a GUI
 def Menu():
     sg.theme('LightBlue')
@@ -57,8 +44,17 @@ def Menu():
         if event == 'log':
             window['log'].update(value=error_log.log[-1])
 
-        if event == 'Executar':
-            executarscripts(window, values, principal)
+        for programa in principal.programas.lista:
+            if values[programa.definicao]:
+                programa.change_gui(window, values)
+                if event == 'Executar':
+                    programa.configurar(window, values)
+
+        for configuracao in principal.configuracoes.lista:
+            if values[configuracao.definicao]:
+                configuracao.change_gui(window, values)
+                if event == 'Executar':
+                    configuracao.configurar(window, values)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
