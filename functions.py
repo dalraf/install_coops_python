@@ -6,7 +6,6 @@ import shutil
 import zipfile
 import time
 from loguru import logger
-from log import error_log
 from config import *
 
 
@@ -15,8 +14,6 @@ logger.add("INSTALL_COOPS.log")
 
 def reportar(msg):
     logger.debug(msg)
-    error_log.addlog(msg)
-
 
 def executar(command):
     startupinfo = subprocess.STARTUPINFO()

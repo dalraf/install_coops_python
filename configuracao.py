@@ -1,5 +1,4 @@
 import PySimpleGUI as sg
-from log import error_log
 from classes import Object_execute
 from functions import *
 
