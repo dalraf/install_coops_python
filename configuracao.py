@@ -71,7 +71,7 @@ class Citrixcleanup(Object_execute):
 
     def thread_configurar(self):
         reportar("Removendo registro")
-        executar("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
+        executar("reg delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\MSLicensing /f")
 
 
 class Limpezageral(Object_execute):
