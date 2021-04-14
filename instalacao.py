@@ -1,9 +1,9 @@
 from log import error_log
-from classes import Thread_execute
+from classes import Object_execute
 from functions import *
 
 
-class Caixainstall(Thread_execute):
+class Caixainstall(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Caixa"
@@ -25,7 +25,7 @@ class Caixainstall(Thread_execute):
 
 
 
-class Sisbrinstall(Thread_execute):
+class Sisbrinstall(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Sisbr 2.0"
@@ -45,7 +45,7 @@ class Sisbrinstall(Thread_execute):
         executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
 
 
-class Citrixinstall(Thread_execute):
+class Citrixinstall(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Citrix 10"
@@ -70,7 +70,7 @@ class Citrixinstall(Thread_execute):
                  '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
 
-class Sicoobnetinstall(Thread_execute):
+class Sicoobnetinstall(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do SicoobNet"
@@ -89,7 +89,7 @@ class Sicoobnetinstall(Thread_execute):
         executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
-class Spark(Thread_execute):
+class Spark(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Spark"
@@ -107,7 +107,7 @@ class Spark(Thread_execute):
         sparkconf.close()
 
 
-class Adobeair(Thread_execute):
+class Adobeair(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Adobe Air"
@@ -126,7 +126,7 @@ class Adobeair(Thread_execute):
         executar(self.diretorio + "\\adobeair")
 
 
-class Java(Thread_execute):
+class Java(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Java"
@@ -137,7 +137,7 @@ class Java(Thread_execute):
         installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
 
 
-class Teamviewer(Thread_execute):
+class Teamviewer(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Teamviewer"
@@ -148,7 +148,7 @@ class Teamviewer(Thread_execute):
         installprograma(self.diretorio, self.definicao)
 
 
-class Anydesk(Thread_execute):
+class Anydesk(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Anydesk"
@@ -159,7 +159,7 @@ class Anydesk(Thread_execute):
         installprograma(self.diretorio, self.definicao)
 
 
-class Googlechrome(Thread_execute):
+class Googlechrome(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Google Chrome"
@@ -170,7 +170,7 @@ class Googlechrome(Thread_execute):
         installprograma(self.diretorio, self.definicao)
 
 
-class Firefox(Thread_execute):
+class Firefox(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Instalação do Firefox"

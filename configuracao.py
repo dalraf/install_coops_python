@@ -1,5 +1,6 @@
+import PySimpleGUI as sg
 from log import error_log
-from classes import Thread_execute
+from classes import Object_execute
 from functions import *
 
 class Dominio():
@@ -23,7 +24,7 @@ class Senha():
         self.valor = ""
 
 
-class Adicionaraodominio(Thread_execute):
+class Adicionaraodominio(Object_execute):
     def __init__(self, diretorio):
         self.dominio = Dominio()
         self.usuario = Usuario()
@@ -31,15 +32,37 @@ class Adicionaraodominio(Thread_execute):
         self.descricao = "Adicionar ao domínio"
         self.definicao = "addtodomain"
 
-    def thread_configurar(self, dominio, usuario, senha):
-        self.dominio.valor = dominio
-        self.usuario.valor = usuario
-        self.senha.valor = senha
+    def thread_configurar(self):
         reportar("Adicionando ao domínio")
         addtodomain(self.dominio.valor, self.usuario.valor, self.senha.valor)
 
+    def change_gui(self, window, values):
+        self.dominio.valor = values[self.dominio.definicao]
+        self.usuario.valor = values[self.usuario.definicao]
+        self.senha.valor = values[self.usuario.definicao]
+        estado = values[self.definicao]
+        window[self.dominio.definicao].update(
+            disabled=not estado)
+        window[self.usuario.definicao].update(
+            disabled=not estado)
+        window[self.senha.definicao].update(
+            disabled=not estado)
 
-class Citrixcleanup(Thread_execute):
+    def gui(self):
+        dominio = [
+        [sg.Checkbox(self.descricao,
+                     key=self.definicao, size=(24, 1), enable_events=True)],
+        [sg.Text(self.dominio.descricao, justification='left', size=(9, 1)), sg.Input(
+            '', key=self.dominio.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+        [sg.Text(self.usuario.descricao, justification='left', size=(9, 1)), sg.Input(
+            '', key=self.usuario.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+        [sg.Text(self.senha.descricao, justification='left', size=(9, 1)), sg.Input(
+            '', key=self.senha.definicao, password_char='*', background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
+        ]
+        return [sg.Frame('Domínio:', dominio, font='Any 12', title_color='black')]
+
+
+class Citrixcleanup(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Limpar registro do Citrix"
@@ -50,7 +73,7 @@ class Citrixcleanup(Thread_execute):
         executar("reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\MSLicensing /f")
 
 
-class Limpezageral(Thread_execute):
+class Limpezageral(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Limpar diretório Arcom"
@@ -63,7 +86,7 @@ class Limpezageral(Thread_execute):
             shutil.rmtree(self.diretorio)
 
 
-class Reniciar(Thread_execute):
+class Reniciar(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Reniciar cpu após execução"
@@ -75,7 +98,7 @@ class Reniciar(Thread_execute):
         executar("shutdown /t 0 /r")
 
 
-class OpenvpnStart(Thread_execute):
+class OpenvpnStart(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Ativar openvpn"
@@ -88,7 +111,7 @@ class OpenvpnStart(Thread_execute):
         executar("net start openvpnservice")
 
 
-class OpenvpnStop(Thread_execute):
+class OpenvpnStop(Object_execute):
 
     def __init__(self, diretorio):
         self.descricao = "Desativar openvpn"

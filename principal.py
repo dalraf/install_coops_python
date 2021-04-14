@@ -35,7 +35,7 @@ class Configuracoes():
     def __init__(self, diretorio):
         self.lista = []
         self.diretorioarcom = Diretorioarcom(diretorio)
-        self.adicionaraodominio = Adicionaraodominio(self.diretorioarcom.diretorio)
+        self.lista.append(Adicionaraodominio(self.diretorioarcom.diretorio))
         self.lista.append(Citrixcleanup(self.diretorioarcom.diretorio))
         self.lista.append(OpenvpnStart(self.diretorioarcom.diretorio))
         self.lista.append(OpenvpnStop(self.diretorioarcom.diretorio))
