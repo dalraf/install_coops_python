@@ -12,7 +12,7 @@ class Object_execute(Functions):
         self.verify_thread_descricao = "Verify_Thread"
 
     def reportar(self,msg):
-        self.logger.debug(msg)
+        self.logger.debug(self.definicao + " : " + msg)
         self.message_log = msg
         self.window.write_event_value(self.verify_thread_descricao,self.verify_thread_descricao)
 
@@ -50,5 +50,5 @@ class Object_execute(Functions):
         self.init_thread = True
 
     def gui(self):
-        return [sg.Checkbox(self.descricao, key=self.definicao, size=(16, 1)), sg.Text("",key=self.definicao + "status", justification='left', size=(20, 1)),]
+        return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), sg.Input("",key=self.definicao + "status", background_color="White", justification='left', disabled=True, size=(30, 1)),]
         
