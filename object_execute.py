@@ -9,11 +9,12 @@ class Object_execute(Functions):
         self.init_thread = False
         self.message_log = ""
         self.define_param()
+        self.verify_thread_descricao = "Verify_Thread"
 
     def reportar(self,msg):
         self.logger.debug(msg)
         self.message_log = msg
-        self.window.write_event_value('Verify_Thread',"Verify_Thread")
+        self.window.write_event_value(self.verify_thread_descricao,self.verify_thread_descricao)
 
     def define_param(self):
         self.definicao = ""
