@@ -5,15 +5,19 @@ import os
 import shutil
 import zipfile
 import time
-from loguru import logger
+import logging
 from config import Config
 
 class Functions(Config):
 
     def __init__(self):
         super().__init__()
-        self.logger = logger
-        self.logger.add("INSTALL_COOPS.log")
+        logging.basicConfig(filename="INSTALL_COOPS.log",
+                            filemode='a',
+                            format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                            datefmt='%H:%M:%S',
+                            level=logging.DEBUG)
+        self.logger = logging
 
 
     def reportar(self,msg):
