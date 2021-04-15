@@ -11,6 +11,7 @@ from config import Config
 class Functions(Config):
 
     def __init__(self):
+        super().__init__()
         self.logger = logger
         self.logger.add("INSTALL_COOPS.log")
 

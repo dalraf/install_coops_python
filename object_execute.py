@@ -5,7 +5,7 @@ from functions import Functions
 class Object_execute(Functions):
 
     def __init__(self):
-        super(Object_execute).__init__()
+        super().__init__()
         self.init_thread = False
         self.status_icon = ["-","\\","|","/",]
         self.index_icon = 0
