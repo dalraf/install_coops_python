@@ -7,15 +7,13 @@ class Object_execute(Functions):
     def __init__(self):
         super().__init__()
         self.init_thread = False
-        self.status_icon = ["-","\\","|","/",]
-        self.index_icon = 0
+        self.message_log = ""
         self.define_param()
 
-    def status_running(self):
-        self.index_icon += 1
-        if self.index_icon > (len(self.status_icon) - 1):
-            self.index_icon = 0
-        return self.status_icon[self.index_icon]
+    def reportar(self,msg):
+        self.logger.debug(msg)
+        self.message_log = msg
+        self.window.write_event_value('Verify_Thread',"Verify_Thread")
 
     def define_param(self):
         self.definicao = ""
@@ -25,20 +23,25 @@ class Object_execute(Functions):
         pass
     
     def verify_thread(self, window, values):
+        self.window = window
+        self.values = values
         if self.init_thread == True and self.processo.is_alive():
-            window[self.definicao + "status"].update(value=self.status_running())
+            self.window[self.definicao + "status"].update(value=self.message_log)
         
         elif self.init_thread == True and not self.processo.is_alive():
             self.init_thread = False
-            window[self.definicao + "status"].update(value="")
+            self.window[self.definicao + "status"].update(value="")
 
         else:
-            window[self.definicao + "status"].update(value="")
+            self.window[self.definicao + "status"].update(value="")
 
     def change_gui(self, window, values):
-        pass
+        self.window = window
+        self.values = values
 
     def configurar(self, window, values):
+        self.window = window
+        self.values = values
         self.diretorio = self.diretorioarcom
         self.change_gui(window, values)
         self.processo = threading.Thread(target=self.thread_configurar, args=())
@@ -46,5 +49,5 @@ class Object_execute(Functions):
         self.init_thread = True
 
     def gui(self):
-        return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), sg.Text("",key=self.definicao + "status", justification='left', size=(2, 1)),]
+        return [sg.Checkbox(self.descricao, key=self.definicao, size=(16, 1)), sg.Text("",key=self.definicao + "status", justification='left', size=(20, 1)),]
         

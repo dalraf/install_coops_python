@@ -30,7 +30,8 @@ def Menu():
 
         for objeto in principal.programas.lista + principal.configuracoes.lista:
             objeto.change_gui(window, values)
-            objeto.verify_thread(window, values)
+            if event == 'Verify_Thread':
+                objeto.verify_thread(window, values)
             if event == 'Executar' and values[objeto.definicao]:
                 objeto.configurar(window, values)
 
