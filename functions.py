@@ -31,7 +31,8 @@ class Functions(Config):
             if(str(error) == ""):
                 error = result
             self.reportar("Code: " + str(exitCode) + " - Message: " + errortext)
-        self.reportar(errortext)
+        else:
+            self.reportar(errortext)
 
 
     # Função para adicionar no domínio

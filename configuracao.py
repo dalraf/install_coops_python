@@ -33,14 +33,16 @@ class Adicionaraodominio(Object_execute):
         self.definicao = "addtodomain"
 
     def thread_configurar(self):
+        self.dominio.valor = self.values[self.dominio.definicao]
+        self.usuario.valor = self.values[self.usuario.definicao]
+        self.senha.valor = self.values[self.usuario.definicao]
         self.reportar("Adicionando ao domínio")
         self.addtodomain(self.dominio.valor, self.usuario.valor, self.senha.valor)
 
     def change_gui(self, window, values):
-        self.dominio.valor = values[self.dominio.definicao]
-        self.usuario.valor = values[self.usuario.definicao]
-        self.senha.valor = values[self.usuario.definicao]
-        estado = values[self.definicao]
+        self.window = window
+        self.values = values
+        estado = self.values[self.definicao]
         window[self.dominio.definicao].update(
             disabled=not estado)
         window[self.usuario.definicao].update(
