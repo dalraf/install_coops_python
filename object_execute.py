@@ -50,5 +50,6 @@ class Object_execute(Functions):
         self.init_thread = True
 
     def gui(self):
-        return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), sg.Input("",key=self.definicao + "status", background_color="White", justification='left', disabled=True, size=(30, 1)),]
+        return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), 
+                sg.Input("",key=self.definicao + "status", background_color="White", border_width=1, justification='left', disabled=True, size=(30, 1)),]
         
