@@ -15,7 +15,7 @@ class Object_execute(Functions):
         if msg != "" or msg != None:
             self.logger.debug(self.definicao + " : " + msg)
             self.message_log = msg
-            if self.processo and self.processo.is_alive():
+            if self.processo:
                 self.window.write_event_value(self.verify_thread_descricao,self.definicao)
 
     def define_param(self):
@@ -29,7 +29,7 @@ class Object_execute(Functions):
         self.window = window
         self.values = values
  
-        if self.processo and self.processo.is_alive():
+        if self.processo:
             self.window[self.definicao + "status"].update(value=self.message_log)
 
     def change_gui(self, window, values):
