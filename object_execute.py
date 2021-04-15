@@ -6,16 +6,17 @@ class Object_execute(Functions):
 
     def __init__(self):
         super().__init__()
+        self.define_param()
         self.processo = False
         self.message_log = ""
-        self.define_param()
         self.verify_thread_descricao = "Verify_Thread"
 
     def reportar(self,msg):
-        self.logger.debug(self.definicao + " : " + msg)
-        self.message_log = msg
-        if self.processo and self.processo.is_alive():
-            self.window.write_event_value(self.verify_thread_descricao,self.verify_thread_descricao)
+        if msg != "" or msg != None:
+            self.logger.debug(self.definicao + " : " + msg)
+            self.message_log = msg
+            if self.processo and self.processo.is_alive():
+                self.window.write_event_value(self.verify_thread_descricao,self.definicao)
 
     def define_param(self):
         self.definicao = ""

@@ -27,9 +27,10 @@ def Menu():
 
     while True:
         event, values = window.read()
-
+        
         for objeto in principal.programas.lista + principal.configuracoes.lista:
-            objeto.change_gui(window, values)
+            if event == objeto.definicao:
+                objeto.change_gui(window, values)
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
             if event == 'Executar' and values[objeto.definicao]:
