@@ -1,11 +1,11 @@
 import PySimpleGUI as sg
 import threading
-from config import diretorioarcom
+from functions import Functions
 
-
-class Object_execute():
+class Object_execute(Functions):
 
     def __init__(self):
+        super(Object_execute).__init__()
         self.init_thread = False
         self.status_icon = ["-","\\","|","/",]
         self.index_icon = 0
@@ -39,7 +39,7 @@ class Object_execute():
         pass
 
     def configurar(self, window, values):
-        self.diretorio = diretorioarcom
+        self.diretorio = self.diretorioarcom
         self.change_gui(window, values)
         self.processo = threading.Thread(target=self.thread_configurar, args=())
         self.processo.start()

@@ -1,6 +1,7 @@
-from classes import Object_execute
-from functions import *
-
+import os
+import zipfile
+import requests
+from object_execute import Object_execute
 
 class Caixainstall(Object_execute):
 
@@ -9,16 +10,16 @@ class Caixainstall(Object_execute):
         self.definicao = "caixainstall"
 
     def thread_configurar(self):
-        createdirarcom(self.diretorio)
-        reportar("Baixando o Caixa")
+        self.createdirarcom(self.diretorio)
+        self.reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorio + "\\Setup.jar"):
             file_id = '1M5SFb5f6z459xNLw7COboxXpH-PrBmqq'
             destination = self.diretorio + '\\Setup.jar'
-            download_file_from_google_drive(file_id, destination)
-            reportar("Download finalizado")
-        reportar("Executando instalação")
-        executar('java -jar ' + self.diretorio + "\\Setup.jar")
-        executar('move ' + userdesktop + ' Caixa.lnk ' + allusersdesktop)
+            self.download_file_from_google_drive(file_id, destination)
+            self.reportar("Download finalizado")
+        self.reportar("Executando instalação")
+        self.executar('java -jar ' + self.diretorio + "\\Setup.jar")
+        self.executar('move ' + self.userdesktop + ' Caixa.lnk ' + self.allusersdesktop)
 
 
 class Sisbrinstall(Object_execute):
@@ -28,16 +29,16 @@ class Sisbrinstall(Object_execute):
         self.definicao = "sisbr20install"
 
     def thread_configurar(self):
-        createdirarcom(self.diretorio)
-        reportar("Baixando sisbr 2.0")
+        self.createdirarcom(self.diretorio)
+        self.reportar("Baixando sisbr 2.0")
         if not os.path.isfile(self.diretorio + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
             destination = self.diretorio + '\\sisbr2.0.exe'
-            download_file_from_google_drive(file_id, destination)
-            reportar("Download finalizado")
-        reportar("Executando instalação")
-        executar(self.diretorio + "\\sisbr2.0.exe")
-        executar('move ' + userdesktop + ' Sisbr 2.0.lnk ' + allusersdesktop)
+            self.download_file_from_google_drive(file_id, destination)
+            self.reportar("Download finalizado")
+        self.reportar("Executando instalação")
+        self.executar(self.diretorio + "\\sisbr2.0.exe")
+        self.executar('move ' + self.userdesktop + ' Sisbr 2.0.lnk ' + self.allusersdesktop)
 
 
 class Citrixinstall(Object_execute):
@@ -47,20 +48,20 @@ class Citrixinstall(Object_execute):
         self.definicao = "citrix10"
 
     def thread_configurar(self):
-        createdirarcom(self.diretorio)
-        diretoriocitrix = self.diretorio + "\\Citrix"
-        criardiretorio(diretoriocitrix)
-        reportar("Baixando citrix 10")
+        self.createdirarcom(self.diretorio)
+        self.diretoriocitrix = self.diretorio + "\\Citrix"
+        self.criardiretorio(self.diretoriocitrix)
+        self.reportar("Baixando citrix 10")
         if not os.path.isfile(self.diretorio + "\\Citrix10.zip"):
             file_id = '19o1eGqGL6xR1B9b3VYunea4zzYe3Heb9'
             destination = self.diretorio + '\\Citrix10.zip'
-            download_file_from_google_drive(file_id, destination)
-            reportar("Download finalizado")
-        reportar("Executando descompactação")
+            self.download_file_from_google_drive(file_id, destination)
+            self.reportar("Download finalizado")
+        self.reportar("Executando descompactação")
         with zipfile.ZipFile(self.diretorio + '\\Citrix10.zip', 'r') as citrixzip:
-            citrixzip.extractall(diretoriocitrix)
-        reportar("Executando instalação")
-        executar('msiexec /i "' + diretoriocitrix +
+            citrixzip.extractall(self.diretoriocitrix)
+        self.reportar("Executando instalação")
+        self.executar('msiexec /i "' + self.diretoriocitrix +
                  '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
 
@@ -71,15 +72,15 @@ class Sicoobnetinstall(Object_execute):
         self.definicao = "sicoobnet"
 
     def thread_configurar(self):
-        createdirarcom(self.diretorio)
+        self.createdirarcom(self.diretorio)
         if not os.path.isfile(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe"):
-            reportar("Baixando Sicoobnet Empresarial")
+            self.reportar("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe",
                  'wb').write(download.content)
-        reportar("Executando instalação")
-        executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
+        self.reportar("Executando instalação")
+        self.executar(self.diretorio + "\\instalador-sicoobnet-windows-amd64.exe")
 
 
 class Spark(Object_execute):
@@ -89,13 +90,13 @@ class Spark(Object_execute):
         self.definicao = "spark"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, self.definicao)
+        self.installprograma(self.diretorio, self.definicao)
         appdata = os.getenv('APPDATA')
         if not os.path.exists(appdata + '\\Spark'):
             os.mkdir(appdata + '\\Spark')
         filesparkconf = appdata + '\\Spark\\spark.properties'
         with open(filesparkconf, "w") as sparkconf:
-            sparkconf.write(filestringspark)
+            sparkconf.write(self.filestringspark)
         sparkconf.close()
 
 
@@ -106,15 +107,15 @@ class Adobeair(Object_execute):
         self.definicao = "adobeair"
 
     def thread_configurar(self):
-        createdirarcom(self.diretorio)
-        reportar("Baixando Adobe Air")
+        self.createdirarcom(self.diretorio)
+        self.reportar("Baixando Adobe Air")
         if not os.path.isfile(self.diretorio + "\\adobeair.exe"):
             file_id = '13fUuPTnwpzIoydnefw9bcdX2h5KbJb0N'
             destination = self.diretorio + '\\adobeair.exe'
-            download_file_from_google_drive(file_id, destination)
-            reportar("Download finalizado")
-        reportar("Executando instalação")
-        executar(self.diretorio + "\\adobeair")
+            self.download_file_from_google_drive(file_id, destination)
+            self.reportar("Download finalizado")
+        self.reportar("Executando instalação")
+        self.executar(self.diretorio + "\\adobeair")
 
 
 class Java(Object_execute):
@@ -124,7 +125,7 @@ class Java(Object_execute):
         self.definicao = "javaruntime"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
+        self.installprograma(self.diretorio, 'javaruntime --x86SteamSteam')
 
 
 class Teamviewer(Object_execute):
@@ -134,7 +135,7 @@ class Teamviewer(Object_execute):
         self.definicao = "teamviewer"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, self.definicao)
+        self.installprograma(self.diretorio, self.definicao)
 
 
 class Anydesk(Object_execute):
@@ -144,7 +145,7 @@ class Anydesk(Object_execute):
         self.definicao = "anydesk.install"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, self.definicao)
+        self.installprograma(self.diretorio, self.definicao)
 
 
 class Googlechrome(Object_execute):
@@ -154,7 +155,7 @@ class Googlechrome(Object_execute):
         self.definicao = "googlechrome"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, self.definicao)
+        self.installprograma(self.diretorio, self.definicao)
 
 
 class Firefox(Object_execute):
@@ -164,4 +165,4 @@ class Firefox(Object_execute):
         self.definicao = "firefox"
 
     def thread_configurar(self):
-        installprograma(self.diretorio, self.definicao)
+        self.installprograma(self.diretorio, self.definicao)

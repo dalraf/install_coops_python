@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
-from classes import Object_execute
-from functions import *
-
+import shutil
+import os
+from object_execute import Object_execute
 
 class Dominio():
     def __init__(self):
@@ -33,8 +33,8 @@ class Adicionaraodominio(Object_execute):
         self.definicao = "addtodomain"
 
     def thread_configurar(self):
-        reportar("Adicionando ao domínio")
-        addtodomain(self.dominio.valor, self.usuario.valor, self.senha.valor)
+        self.reportar("Adicionando ao domínio")
+        self.addtodomain(self.dominio.valor, self.usuario.valor, self.senha.valor)
 
     def change_gui(self, window, values):
         self.dominio.valor = values[self.dominio.definicao]
@@ -70,8 +70,8 @@ class Citrixcleanup(Object_execute):
         self.definicao = "citrixcleanup"
 
     def thread_configurar(self):
-        reportar("Removendo registro")
-        executar("reg delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\MSLicensing /f")
+        self.reportar("Removendo registro")
+        self.executar("reg delete HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\MSLicensing /f")
 
 
 class Limpezageral(Object_execute):
@@ -81,7 +81,7 @@ class Limpezageral(Object_execute):
         self.definicao = "limpezageral"
 
     def thread_configurar(self):
-        reportar("Removendo " + self.diretorio)
+        self.reportar("Removendo " + self.diretorio)
         if os.path.exists(self.diretorio):
             shutil.rmtree(self.diretorio)
 
@@ -93,8 +93,8 @@ class Reniciar(Object_execute):
         self.definicao = "reniciar"
 
     def thread_configurar(self):
-        reportar("Reiniciando...")
-        executar("shutdown /t 0 /r")
+        self.reportar("Reiniciando...")
+        self.executar("shutdown /t 0 /r")
 
 
 class OpenvpnStart(Object_execute):
@@ -104,9 +104,9 @@ class OpenvpnStart(Object_execute):
         self.definicao = "openvpnstart"
 
     def thread_configurar(self):
-        reportar("Iniciando Openvpn")
-        executar("sc config openvpnservice start=auto")
-        executar("net start openvpnservice")
+        self.reportar("Iniciando Openvpn")
+        self.executar("sc config openvpnservice start=auto")
+        self.executar("net start openvpnservice")
 
 
 class OpenvpnStop(Object_execute):
@@ -116,6 +116,6 @@ class OpenvpnStop(Object_execute):
         self.definicao = "openvpnstop"
 
     def thread_configurar(self):
-        reportar("Parando Openvpn")
-        executar("sc config openvpnservice start=demand")
-        executar("net stop openvpnservice")
+        self.reportar("Parando Openvpn")
+        self.executar("sc config openvpnservice start=demand")
+        self.executar("net stop openvpnservice")
