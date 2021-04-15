@@ -58,7 +58,7 @@ class Adicionaraodominio(Object_execute):
                 '', key=self.usuario.definicao, background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
             [sg.Text(self.senha.descricao, justification='left', size=(9, 1)), sg.Input(
                 '', key=self.senha.definicao, password_char='*', background_color='white', border_width=1, justification='left', size=(15, 1), disabled=True)],
-            [sg.Text("",key=self.definicao + "status", justification='left', size=(2, 1))]    
+            [sg.Input("",key=self.definicao + "status", background_color="White", border_width=1, justification='left', disabled=True, size=(30, 1)),]    
         ]
         return [sg.Frame('Domínio:', dominio, font='Any 12', title_color='black')]
 
