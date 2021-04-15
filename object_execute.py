@@ -38,7 +38,6 @@ class Object_execute(Functions):
     def configurar(self, window, values):
         self.window = window
         self.values = values
-        self.diretorio = self.diretorioarcom
         self.processo = threading.Thread(target=self.thread_configurar, args=())
         self.processo.start()
 

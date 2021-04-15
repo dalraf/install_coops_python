@@ -83,9 +83,9 @@ class Limpezageral(Object_execute):
         self.definicao = "limpezageral"
 
     def thread_configurar(self):
-        self.reportar("Removendo " + self.diretorio)
-        if os.path.exists(self.diretorio):
-            shutil.rmtree(self.diretorio)
+        self.reportar("Removendo " + self.diretorioarcom)
+        if os.path.exists(self.diretorioarcom):
+            shutil.rmtree(self.diretorioarcom)
 
 
 class Reniciar(Object_execute):

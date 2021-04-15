@@ -12,7 +12,7 @@ class Functions(Config):
 
     def __init__(self):
         super().__init__()
-        logging.basicConfig(filename="INSTALL_COOPS.log",
+        logging.basicConfig(filename=self.diretorioarcom + "\\INSTALL_COOPS.log",
                             filemode='a',
                             format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                             datefmt='%H:%M:%S',
