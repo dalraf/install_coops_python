@@ -27,13 +27,13 @@ def Menu():
 
     while True:
         event, values = window.read()
-        
+
         for objeto in principal.programas.lista + principal.configuracoes.lista:
             if event == objeto.definicao:
                 objeto.change_gui(window, values)
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
-            if event == 'Executar' and values[objeto.definicao]:
+            if event == 'Executar' and values[objeto.definicao] == True:
                 objeto.configurar(window, values)
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
