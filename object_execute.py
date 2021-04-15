@@ -9,7 +9,7 @@ class Object_execute(Functions):
         self.define_param()
         self.processo = False
         self.message_log = ""
-        self.verify_thread_descricao = "Verify_Thread"
+        self.verify_thread_descricao = self.definicao + "-Verify_Thread"
 
     def reportar(self,msg):
         if msg != "" or msg != None:
