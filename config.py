@@ -1,8 +1,12 @@
+import os
 class Config():
 
     def __init__(self):
 
         self.diretorioarcom = "c:\\Arcom"
+
+        if not os.path.exists(self.diretorioarcom):
+            os.mkdir(self.diretorioarcom)
 
         self.chocolateypath = "c:\\ProgramData\\chocolatey\\choco.exe"
 
