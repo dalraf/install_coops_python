@@ -125,7 +125,7 @@ class Java(Object_execute):
         self.definicao = "javaruntime"
 
     def thread_configurar(self):
-        self.installprograma(self.diretorioarcom, 'javaruntime --x86SteamSteam')
+        self.installprograma(self.diretorioarcom, 'jre8 -PackageParameters "/exclude:64" -y')
 
 
 class Teamviewer(Object_execute):
