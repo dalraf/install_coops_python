@@ -40,6 +40,7 @@ class Object_execute(Functions):
         self.values = values
         self.processo = threading.Thread(target=self.thread_configurar, args=())
         self.processo.start()
+        self.processo.join()
 
     def gui(self):
         return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), 

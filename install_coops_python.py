@@ -4,9 +4,17 @@ from principal import Principal
 import time
 import threading
 
+listaexecutar = []
+indexecutar = -1
+
 principal = Principal()
 
 # Funcao que gera o a GUI
+
+def runsequencial(lista, window, values):
+    for objeto in lista:
+        objeto.configurar(window, values)
+
 
 
 def Menu():
@@ -34,7 +42,11 @@ def Menu():
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
             if event == 'Executar' and values[objeto.definicao] == True:
-                objeto.configurar(window, values)
+                listaexecutar.append(objeto)
+        
+        if event == 'Executar':
+            execucao = threading.Thread(target=runsequencial, args=(listaexecutar, window, values))
+            execucao.start()
 
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
