@@ -15,7 +15,6 @@ def runsequencial(lista, window, values):
     for objeto in lista:
         objeto.configurar(window, values)
 
-    listaexecutar = []
 
 
 def Menu():
@@ -43,7 +42,11 @@ def Menu():
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
             if event == 'Executar' and values[objeto.definicao] == True:
-                listaexecutar.append(objeto)
+                if not objeto in listaexecutar:
+                    listaexecutar.append(objeto)
+            elif values[objeto.definicao] == False:
+                if objeto in listaexecutar:
+                    listaexecutar.remove(objeto)
         
         if event == 'Executar':
             execucao = threading.Thread(target=runsequencial, args=(listaexecutar, window, values))
