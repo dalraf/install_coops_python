@@ -27,7 +27,6 @@ class Configuracoes():
         self.lista.append(Citrixcleanup())
         self.lista.append(OpenvpnStart())
         self.lista.append(OpenvpnStop())
-        self.lista.append(Limpezageral())
         self.lista.append(Reniciar())
 
     def configurar(self):

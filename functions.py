@@ -26,7 +26,7 @@ class Functions(Config):
     def executar(self,command):
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        process = subprocess.Popen(command, startupinfo=startupinfo, stdout=subprocess.PIPE,
+        process = subprocess.Popen(command, cwd=self.diretorioarcom, startupinfo=startupinfo, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, shell=True)
         result, error = process.communicate()
         exitCode = process.wait()
