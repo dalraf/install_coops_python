@@ -14,6 +14,7 @@ principal = Principal()
 def runsequencial(lista, window, values):
     for objeto in lista:
         objeto.configurar(window, values)
+    lista = []
 
 
 
