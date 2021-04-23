@@ -11,6 +11,11 @@ class Caixainstall(Object_execute):
         self.definicao = "caixainstall"
 
     def thread_configurar(self):
+        self.java = Java()
+        self.java.window = self.window
+        self.java.values = self.values
+        self.java.reportar = self.reportar
+        self.java.thread_configurar()
         self.reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorioarcom + "\\Setup.jar"):
             file_id = '1M5SFb5f6z459xNLw7COboxXpH-PrBmqq'
