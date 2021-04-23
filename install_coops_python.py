@@ -9,13 +9,15 @@ indexecutar = -1
 
 principal = Principal()
 
-# Funcao que gera o a GUI
+
+#Funcao que roda a instalacao em sequencia
 
 def runsequencial(lista, window, values):
     for objeto in lista:
         objeto.configurar(window, values)
 
 
+# Funcao que gera o a GUI
 
 def Menu():
     sg.theme('LightBlue')
@@ -32,6 +34,8 @@ def Menu():
     layout = [[sg.Frame('Instalação:', listainstalacao, font='Any 12', title_color='black'), sg.Frame('Configuração:',
                                                                                                       listaconfiguracao, font='Any 12', title_color='black')], [sg.Button('Executar'), sg.Button('Cancelar'),]]
     window = sg.Window('Arcom Install', font=("Helvetica", 12)).Layout(layout)
+
+    #Loop da Gui
 
     while True:
         event, values = window.read()
