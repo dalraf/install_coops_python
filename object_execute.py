@@ -6,6 +6,8 @@ class Object_execute(Functions):
 
     def __init__(self):
         super().__init__()
+        self.window = None
+        self.values =  None
         self.define_param()
         self.processo = False
         self.message_log = ""
