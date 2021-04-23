@@ -31,6 +31,11 @@ class Sisbrinstall(Object_execute):
         self.definicao = "sisbr20install"
 
     def thread_configurar(self):
+        self.adobeair = Adobeair()
+        self.adobeair.window = self.window
+        self.adobeair.values = self.values
+        self.adobeair.reportar = self.reportar
+        self.adobeair.thread_configurar()
         self.reportar("Baixando sisbr 2.0")
         if not os.path.isfile(self.diretorioarcom + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
