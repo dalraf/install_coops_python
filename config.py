@@ -5,8 +5,7 @@ class Config():
 
         self.diretorioarcom = "c:\\Arcom"
 
-        if not os.path.exists(self.diretorioarcom):
-            os.mkdir(self.diretorioarcom)
+        self.criardiretorio(self.diretorioarcom)
 
         self.chocolateypath = "c:\\ProgramData\\chocolatey\\choco.exe"
 
