@@ -17,7 +17,7 @@ class Caixainstall(Object_execute):
             destination = self.diretorioarcom + '\\Setup.jar'
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
-        self.reportar("Executando instalação")
+        self.reportar("Executando instalação do Caixa")
         self.executar('cd ' + self.diretorioarcom +
                       ' & java -jar ' + self.diretorioarcom + "\\Setup.jar")
         self.executar('move ' + self.userdesktop +
@@ -42,7 +42,7 @@ class Sisbrinstall(Object_execute):
             destination = self.diretorioarcom + '\\sisbr2.0.exe'
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
-        self.reportar("Executando instalação")
+        self.reportar("Executando instalação do Sisbr2.0")
         self.executar(self.diretorioarcom + "\\sisbr2.0.exe")
         self.executar('move ' + self.userdesktop +
                       ' Sisbr 2.0.lnk ' + self.allusersdesktop)
@@ -66,7 +66,7 @@ class Citrixinstall(Object_execute):
         self.reportar("Executando descompactação")
         with zipfile.ZipFile(self.diretorioarcom + '\\Citrix10.zip', 'r') as citrixzip:
             citrixzip.extractall(self.diretorioarcomcitrix)
-        self.reportar("Executando instalação")
+        self.reportar("Executando instalação do Citrix10")
         self.executar('msiexec /i "' + self.diretorioarcomcitrix +
                       '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
@@ -84,7 +84,7 @@ class Sicoobnetinstall(Object_execute):
             download = requests.get(urlsicoobnet, allow_redirects=True)
             open(self.diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe",
                  'wb').write(download.content)
-        self.reportar("Executando instalação")
+        self.reportar("Executando instalação do Sicoobnet")
         self.executar(self.diretorioarcom +
                       "\\instalador-sicoobnet-windows-amd64.exe")
 
@@ -119,7 +119,7 @@ class Adobeair(Object_execute):
             destination = self.diretorioarcom + '\\adobeair.exe'
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
-        self.reportar("Executando instalação")
+        self.reportar("Executando instalação do Adobeair")
         self.executar(self.diretorioarcom + "\\adobeair")
 
 
