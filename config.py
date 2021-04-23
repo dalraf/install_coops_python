@@ -7,7 +7,9 @@ class Config():
 
         self.criardiretorio(self.diretorioarcom)
 
-        self.chocolateypath = "c:\\ProgramData\\chocolatey\\choco.exe"
+        self.javapath = r'"C:\Program Files (x86)\Java\jre1.8.0_281\bin\java.exe"'
+
+        self.chocolateypath = r"c:\ProgramData\chocolatey\choco.exe"
 
         self.filestringspark = """passwordSaved=true
         server=arcompbx.gotdns.com
