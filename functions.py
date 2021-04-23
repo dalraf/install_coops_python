@@ -20,11 +20,11 @@ class Functions(Config):
         self.logger = logging
 
 
-    #Super classe para funcao de report
+    # Super classe para funcao de report
     def reportar(self,msg):
         self.logger.debug(msg)
 
-    #Funcao para execucao de aplicativos e scripts
+    # Execucao de aplicativos e scripts
     def executar(self,command):
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -40,7 +40,7 @@ class Functions(Config):
         else:
             self.reportar("Finalizado sem problema")
 
-    # Função para adicionar no domínio
+    # Adicionar no domínio
     def addtodomain(self, dominio, usuario, senha):
         self.executar(
             f'@"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command \"$domain = "{dominio}"; $password = "{senha}" | ConvertTo-SecureString -asPlainText -Force; $username = \'{usuario}@$domain\';$credential = New-Object System.Management.Automation.PSCredential($username,$password);Add-Computer -DomainName $domain -Credential $credential\"')
@@ -57,7 +57,7 @@ class Functions(Config):
         self.executar(self.chocolateypath + " install -y " + programa)
 
 
-    # Baixa arquivos do google driver
+    # Baixa arquivos do google drive
     def download_file_from_google_drive(self, id, destination):
 
         def get_confirm_token(response):
