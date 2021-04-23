@@ -41,21 +41,23 @@ def Menu():
         event, values = window.read()
 
         for objeto in principal.programas.lista + principal.configuracoes.lista:
+            
             if event == objeto.definicao:
                 objeto.change_gui(window, values)
+            
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
-            if event == 'Executar' and values[objeto.definicao] == True:
-                if not objeto in listaexecutar:
-                    listaexecutar.append(objeto)
-            elif values[objeto.definicao] == False:
-                if objeto in listaexecutar:
-                    listaexecutar.remove(objeto)
-        
-        if event == 'Executar':
-            execucao = threading.Thread(target=runsequencial, args=(listaexecutar, window, values))
-            execucao.start()
-
+            
+            if event == 'Executar':
+                if values[objeto.definicao] == True:
+                    if not objeto in listaexecutar:
+                        listaexecutar.append(objeto)
+                if values[objeto.definicao] == False:
+                    if objeto in listaexecutar:
+                        listaexecutar.remove(objeto)
+                execucao = threading.Thread(target=runsequencial, args=(listaexecutar, window, values))
+                execucao.start()
+    
         if event == sg.WIN_CLOSED or event == 'Cancelar':
             break
 
