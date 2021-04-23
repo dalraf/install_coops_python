@@ -48,7 +48,7 @@ class Sisbrinstall(Object_execute):
             self.reportar("Download finalizado")
         self.reportar("Executando instalação do Sisbr2.0")
         self.executar(self.diretorioarcom + "\\sisbr2.0.exe")
-        executar('move ' + self.userdesktop +
+        self.executar('move ' + self.userdesktop +
                       '"\\Sisbr 2.0.lnk" ' + self.allusersdesktop)
 
 
