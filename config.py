@@ -17,8 +17,8 @@ class Config():
         DisableHostnameVerification=true
         """
         
-        self.allusersdesktop = "c:\\Users\\Public\\Desktop"
-        self.userdesktop = "%USERPROFILE%\\Desktop"
+        self.allusersdesktop = r"c:\Users\Public\Desktop"
+        self.userdesktop = r"%USERPROFILE%\Desktop"
 
     def criardiretorio(self, diretorio):
         if not os.path.exists(diretorio):

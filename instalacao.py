@@ -25,7 +25,7 @@ class Caixainstall(Object_execute):
         self.reportar("Executando instalação do Caixa")
         self.executar(self.javapath + ' -jar ' + self.diretorioarcom + "\\Setup.jar")
         self.executar('move ' + self.userdesktop +
-                    ' Caixa.lnk ' + self.allusersdesktop)
+                    '\\Caixa.lnk ' + self.allusersdesktop)
 
 
 class Sisbrinstall(Object_execute):
@@ -49,7 +49,7 @@ class Sisbrinstall(Object_execute):
         self.reportar("Executando instalação do Sisbr2.0")
         self.executar(self.diretorioarcom + "\\sisbr2.0.exe")
         self.executar('move ' + self.userdesktop +
-                      ' Sisbr 2.0.lnk ' + self.allusersdesktop)
+                      '\\Sisbr 2.0.lnk ' + self.allusersdesktop)
 
 
 class Citrixinstall(Object_execute):
