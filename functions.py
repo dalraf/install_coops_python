@@ -51,7 +51,7 @@ class Functions(Config):
             self.executar(
                 '@"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\\chocolatey\\bin"')
         self.executar(self.chocolateypath + " config set cacheLocation " + diretorioarcom)
-        self.reportar("Executando instalação -- " + programa)
+        self.reportar("Executando instalação, " + programa)
         self.executar(self.chocolateypath + " install -y " + programa)
 
 
