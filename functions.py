@@ -20,9 +20,11 @@ class Functions(Config):
         self.logger = logging
 
 
+    #Super classe para funcao de report
     def reportar(self,msg):
         self.logger.debug(msg)
 
+    #Funcao para execucao de aplicativos e scripts
     def executar(self,command):
         startupinfo = subprocess.STARTUPINFO()
         startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -55,8 +57,7 @@ class Functions(Config):
         self.executar(self.chocolateypath + " install -y " + programa)
 
 
-    # Baixa arquivos do google drives
-
+    # Baixa arquivos do google driver
     def download_file_from_google_drive(self, id, destination):
 
         def get_confirm_token(response):
