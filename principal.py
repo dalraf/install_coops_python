@@ -1,5 +1,5 @@
-from instalacao import *
-from configuracao import *
+from instalacao import Spark,Adobeair,Java,Caixainstall,Teamviewer,Anydesk,Googlechrome,Firefox,Sisbrinstall,Citrixinstall,Sicoobnetinstall
+from configuracao import Adicionaraodominio,Citrixcleanup,OpenvpnStart,OpenvpnStop,Reniciar
 
 
 class Programas():
