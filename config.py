@@ -27,3 +27,7 @@ class Config():
         }
         self.allusersdesktop = "c:\\Users\\Public\\Desktop"
         self.userdesktop = "%USERPROFILE%\\Desktop"
+
+    def criardiretorio(self, diretorio):
+        if not os.path.exists(diretorio):
+            os.mkdir(diretorio)

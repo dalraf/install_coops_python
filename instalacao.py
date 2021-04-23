@@ -3,6 +3,7 @@ import zipfile
 import requests
 from object_execute import Object_execute
 
+
 class Caixainstall(Object_execute):
 
     def define_param(self):
@@ -10,7 +11,6 @@ class Caixainstall(Object_execute):
         self.definicao = "caixainstall"
 
     def thread_configurar(self):
-        self.createdirarcom(self.diretorioarcom)
         self.reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorioarcom + "\\Setup.jar"):
             file_id = '1M5SFb5f6z459xNLw7COboxXpH-PrBmqq'
@@ -18,8 +18,10 @@ class Caixainstall(Object_execute):
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
         self.reportar("Executando instalação")
-        self.executar('cd ' + self.diretorioarcom + ' & java -jar ' + self.diretorioarcom + "\\Setup.jar")
-        self.executar('move ' + self.userdesktop + ' Caixa.lnk ' + self.allusersdesktop)
+        self.executar('cd ' + self.diretorioarcom +
+                      ' & java -jar ' + self.diretorioarcom + "\\Setup.jar")
+        self.executar('move ' + self.userdesktop +
+                      ' Caixa.lnk ' + self.allusersdesktop)
 
 
 class Sisbrinstall(Object_execute):
@@ -29,7 +31,6 @@ class Sisbrinstall(Object_execute):
         self.definicao = "sisbr20install"
 
     def thread_configurar(self):
-        self.createdirarcom(self.diretorioarcom)
         self.reportar("Baixando sisbr 2.0")
         if not os.path.isfile(self.diretorioarcom + "\\sisbr2.0.exe"):
             file_id = '13E-X5fZZrj2FMZDIcLWJ94c9DgTqUA3f'
@@ -38,7 +39,8 @@ class Sisbrinstall(Object_execute):
             self.reportar("Download finalizado")
         self.reportar("Executando instalação")
         self.executar(self.diretorioarcom + "\\sisbr2.0.exe")
-        self.executar('move ' + self.userdesktop + ' Sisbr 2.0.lnk ' + self.allusersdesktop)
+        self.executar('move ' + self.userdesktop +
+                      ' Sisbr 2.0.lnk ' + self.allusersdesktop)
 
 
 class Citrixinstall(Object_execute):
@@ -48,7 +50,6 @@ class Citrixinstall(Object_execute):
         self.definicao = "citrix10"
 
     def thread_configurar(self):
-        self.createdirarcom(self.diretorioarcom)
         self.diretorioarcomcitrix = self.diretorioarcom + "\\Citrix"
         self.criardiretorio(self.diretorioarcomcitrix)
         self.reportar("Baixando citrix 10")
@@ -62,7 +63,7 @@ class Citrixinstall(Object_execute):
             citrixzip.extractall(self.diretorioarcomcitrix)
         self.reportar("Executando instalação")
         self.executar('msiexec /i "' + self.diretorioarcomcitrix +
-                 '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
+                      '\\Citrix10\\Versao 10.1\\PN_10_1.msi"')
 
 
 class Sicoobnetinstall(Object_execute):
@@ -72,7 +73,6 @@ class Sicoobnetinstall(Object_execute):
         self.definicao = "sicoobnet"
 
     def thread_configurar(self):
-        self.createdirarcom(self.diretorioarcom)
         if not os.path.isfile(self.diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe"):
             self.reportar("Baixando Sicoobnet Empresarial")
             urlsicoobnet = "https://office-sicoob-instalador.s3-us-west-2.amazonaws.com/instalador-sicoobnet-windows-amd64.exe"
@@ -80,7 +80,8 @@ class Sicoobnetinstall(Object_execute):
             open(self.diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe",
                  'wb').write(download.content)
         self.reportar("Executando instalação")
-        self.executar(self.diretorioarcom + "\\instalador-sicoobnet-windows-amd64.exe")
+        self.executar(self.diretorioarcom +
+                      "\\instalador-sicoobnet-windows-amd64.exe")
 
 
 class Spark(Object_execute):
@@ -107,7 +108,6 @@ class Adobeair(Object_execute):
         self.definicao = "adobeair"
 
     def thread_configurar(self):
-        self.createdirarcom(self.diretorioarcom)
         self.reportar("Baixando Adobe Air")
         if not os.path.isfile(self.diretorioarcom + "\\adobeair.exe"):
             file_id = '13fUuPTnwpzIoydnefw9bcdX2h5KbJb0N'
@@ -125,7 +125,8 @@ class Java(Object_execute):
         self.definicao = "javaruntime"
 
     def thread_configurar(self):
-        self.installprograma(self.diretorioarcom, 'jre8 -PackageParameters "/exclude:64" -y')
+        self.installprograma(self.diretorioarcom,
+                             'jre8 -PackageParameters "/exclude:64" -y')
 
 
 class Teamviewer(Object_execute):

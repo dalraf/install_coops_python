@@ -55,18 +55,7 @@ class Functions(Config):
         self.executar(self.chocolateypath + " install -y " + programa)
 
 
-    def criardiretorio(self, diretorio):
-        if not os.path.exists(diretorio):
-            os.mkdir(diretorio)
-
-    # Cria Diretorio Arcom
-
-
-    def createdirarcom(self, diretorioarcom):
-        self.criardiretorio(diretorioarcom)
-
     # Baixa arquivos do google drives
-
 
     def download_file_from_google_drive(self, id, destination):
 
