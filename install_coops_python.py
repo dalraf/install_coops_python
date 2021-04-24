@@ -52,7 +52,7 @@ def Menu():
                 if values[objeto.definicao] == False:
                     if objeto in listaexecutar:
                         listaexecutar.remove(objeto)
-        
+
         if event == 'Executar':
             execucao = threading.Thread(target=runsequencial, args=(listaexecutar, window, values))
             execucao.start()
