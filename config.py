@@ -7,8 +7,6 @@ class Config():
 
         self.criardiretorio(self.diretorioarcom)
 
-        self.javapathsearch = r'"C:\Program Files (x86)\Java\*\bin\java.exe"'
-
         self.chocolateypath = r"c:\ProgramData\chocolatey\choco.exe"
 
         self.filestringspark = """passwordSaved=true

@@ -24,8 +24,7 @@ class Caixainstall(Object_execute):
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
         self.reportar("Executando instalação do Caixa")
-        self.javapath = glob.glob(self.javapathsearch, recursive=True)[0]
-        self.executar(self.javapath + ' -jar ' + self.diretorioarcom + "\\Setup.jar")
+        self.executar('java -jar ' + self.diretorioarcom + "\\Setup.jar")
         self.executar('move ' + self.userdesktop +
                     '\\Caixa.lnk ' + self.allusersdesktop)
 
