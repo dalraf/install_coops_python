@@ -7,7 +7,7 @@ class Config():
 
         self.criardiretorio(self.diretorioarcom)
 
-        self.javapath = r'"C:\Program Files (x86)\Java\jre1.8.0_281\bin\java.exe"'
+        self.javapathsearch = r'"C:\Program Files (x86)\Java\*\bin\java.exe"'
 
         self.chocolateypath = r"c:\ProgramData\chocolatey\choco.exe"
 
