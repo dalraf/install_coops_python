@@ -1,9 +1,6 @@
 import subprocess
 import requests
 import os
-import shutil
-import zipfile
-import time
 import logging
 from config import Config
 

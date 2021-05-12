@@ -14,7 +14,7 @@ class Object_execute(Functions):
         self.verify_thread_descricao = self.definicao + "-Verify_Thread"
 
     def reportar(self, msg):
-        if msg != "" or msg != None:
+        if msg != "" or msg is not None:
             self.logger.debug(self.definicao + " : " + msg)
             self.message_log = msg
             if self.processo:

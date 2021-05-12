@@ -1,5 +1,4 @@
 import os
-import glob
 import zipfile
 import requests
 from object_execute import Object_execute

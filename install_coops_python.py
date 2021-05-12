@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import PySimpleGUI as sg
 from principal import Principal
-import time
 import threading
 
 listaexecutar = []
@@ -60,10 +59,10 @@ def Menu():
             if event == objeto.verify_thread_descricao:
                 objeto.verify_thread(window, values)
             if event == "Executar":
-                if values[objeto.definicao] == True:
-                    if not objeto in listaexecutar:
+                if values[objeto.definicao] is True:
+                    if objeto not in listaexecutar:
                         listaexecutar.append(objeto)
-                if values[objeto.definicao] == False:
+                if values[objeto.definicao] is False:
                     if objeto in listaexecutar:
                         listaexecutar.remove(objeto)
 
