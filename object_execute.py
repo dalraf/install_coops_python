@@ -2,23 +2,25 @@ import PySimpleGUI as sg
 import threading
 from functions import Functions
 
-class Object_execute(Functions):
 
+class Object_execute(Functions):
     def __init__(self):
         super().__init__()
         self.window = None
-        self.values =  None
+        self.values = None
         self.define_param()
         self.processo = False
         self.message_log = ""
         self.verify_thread_descricao = self.definicao + "-Verify_Thread"
 
-    def reportar(self,msg):
+    def reportar(self, msg):
         if msg != "" or msg != None:
             self.logger.debug(self.definicao + " : " + msg)
             self.message_log = msg
             if self.processo:
-                self.window.write_event_value(self.verify_thread_descricao,self.definicao)
+                self.window.write_event_value(
+                    self.verify_thread_descricao, self.definicao
+                )
 
     def define_param(self):
         self.definicao = ""
@@ -26,11 +28,11 @@ class Object_execute(Functions):
 
     def thread_configurar(self):
         pass
-    
+
     def verify_thread(self, window, values):
         self.window = window
         self.values = values
- 
+
         if self.processo:
             self.window[self.definicao + "status"].update(value=self.message_log)
 
@@ -45,6 +47,15 @@ class Object_execute(Functions):
         self.processo.join()
 
     def gui(self):
-        return [sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)), 
-                sg.Input("",key=self.definicao + "status", background_color="White", border_width=1, justification='left', disabled=True, size=(20, 1)),]
-        
+        return [
+            sg.Checkbox(self.descricao, key=self.definicao, size=(24, 1)),
+            sg.Input(
+                "",
+                key=self.definicao + "status",
+                background_color="White",
+                border_width=1,
+                justification="left",
+                disabled=True,
+                size=(20, 1),
+            ),
+        ]

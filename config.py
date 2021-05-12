@@ -1,6 +1,7 @@
 import os
-class Config():
 
+
+class Config:
     def __init__(self):
 
         self.diretorioarcom = "c:\\Arcom"
@@ -14,7 +15,7 @@ class Config():
         hostAndPort=false
         DisableHostnameVerification=true
         """
-        
+
         self.allusersdesktop = r"c:\Users\Public\Desktop"
         self.userdesktop = r"%USERPROFILE%\Desktop"
 

@@ -1,9 +1,26 @@
-from instalacao import Spark,Adobeair,Java,Caixainstall,Teamviewer,Anydesk,Googlechrome,Firefox,Sisbrinstall,Citrixinstall,Sicoobnetinstall
-from configuracao import Adicionaraodominio,Citrixcleanup,OpenvpnStart,OpenvpnStop,Reniciar
+from instalacao import (
+    Spark,
+    Adobeair,
+    Java,
+    Caixainstall,
+    Teamviewer,
+    Anydesk,
+    Googlechrome,
+    Firefox,
+    Sisbrinstall,
+    Citrixinstall,
+    Sicoobnetinstall,
+)
+from configuracao import (
+    Adicionaraodominio,
+    Citrixcleanup,
+    OpenvpnStart,
+    OpenvpnStop,
+    Reniciar,
+)
 
 
-class Programas():
-
+class Programas:
     def __init__(self):
         self.lista = []
         self.lista.append(Spark())
@@ -19,8 +36,7 @@ class Programas():
         self.lista.append(Sicoobnetinstall())
 
 
-class Configuracoes():
-
+class Configuracoes:
     def __init__(self):
         self.lista = []
         self.lista.append(Adicionaraodominio())
@@ -34,8 +50,7 @@ class Configuracoes():
             configuracao.configurar()
 
 
-class Principal():
-
+class Principal:
     def __init__(self):
         self.programas = Programas()
         self.configuracoes = Configuracoes()
