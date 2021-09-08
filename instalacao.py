@@ -173,3 +173,12 @@ class Firefox(Object_execute):
 
     def thread_configurar(self):
         self.installprograma(self.diretorioarcom, self.definicao)
+
+
+class Adobereader(Object_execute):
+    def define_param(self):
+        self.descricao = "Instalação do Adobe Reader"
+        self.definicao = "adobereader"
+
+    def thread_configurar(self):
+        self.installprograma(self.diretorioarcom, self.definicao)

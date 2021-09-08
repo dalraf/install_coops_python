@@ -10,6 +10,7 @@ from instalacao import (
     Sisbrinstall,
     Citrixinstall,
     Sicoobnetinstall,
+    Adobereader,
 )
 from configuracao import (
     Adicionaraodominio,
@@ -25,6 +26,7 @@ class Programas:
         self.lista = []
         self.lista.append(Spark())
         self.lista.append(Adobeair())
+        self.lista.append(Adobereader())
         self.lista.append(Java())
         self.lista.append(Caixainstall())
         self.lista.append(Teamviewer())
