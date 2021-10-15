@@ -1,15 +1,14 @@
-name: BuildWindows
-
+name: BuildInstallCoops
 on:
-  push:
-    tags:
-      - '*'
-
+  workflow_dispatch:
+    inputs:
+      tagname:
+        description: 'Tag'
+        required: true
+        default: ''
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.8
@@ -37,8 +36,8 @@ jobs:
       with:
         draft: false
         prerelease: false
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
+        tag_name: ${{ github.event.inputs.tagname }}
+        release_name: ${{ github.event.inputs.tagename }}
     - name: upload windows artifact
       uses: actions/upload-release-asset@v1
       env:
