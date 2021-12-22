@@ -23,7 +23,7 @@ jobs:
         pip install nuitka
     - name: build with nuitka
       run: |
-        python -m nuitka --mingw64 --standalone --assume-yes-for-downloads --enable-plugin=TkinterPlugin install_coops_python.py
+        python -m nuitka --mingw64 --standalone --assume-yes-for-downloads --enable-plugin=tk-inter install_coops_python.py
     - uses: actions/upload-artifact@v2
       with:
         name: install_coops_python.exe
