@@ -27,7 +27,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: install_coops_python.exe
-        path: host_make.dist\install_coops_python.exe
+        path: install_coops_python.dist\install_coops_python.exe
     - name: release
       uses: actions/create-release@v1
       id: create_release
@@ -44,6 +44,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: host_make.dist\install_coops_python.exe
-        asset_name: host_make.exe
+        asset_path: install_coops_python.dist\install_coops_python.exe
+        asset_name: install_coops_python.exe
         asset_content_type: application/exe
