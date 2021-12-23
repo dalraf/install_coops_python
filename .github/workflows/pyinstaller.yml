@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
     - name: build with pyinstaller
       run: |
-        python -m PyInstaller --onefile --noconsole --uac-admin install_coops_python.py
+        python -m PyInstaller --onefile --noconsole --uac-admin --icon icon.ico install_coops_python.py
     - uses: actions/upload-artifact@v2
       with:
         name: python-menu.exe
