@@ -52,11 +52,25 @@ class Functions(Config):
 
     # Executa instalacao de programas
     def installprograma(self, diretorioarcom, programa):
+        comando_cmd_script = '''
+@echo off
+
+SET DIR=%~dp0%
+
+::download install.ps1
+%systemroot%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "((new-object net.webclient).DownloadFile('https://community.chocolatey.org/install.ps1','%DIR%install.ps1'))"
+::run installer
+%systemroot%\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& '%DIR%install.ps1' %*"
+        '''
+        cmd_script_name = 'install_chocolatey.bat'
+        cmd_script_path = diretorioarcom + '\\' + cmd_script_name
         if not os.path.isfile(self.chocolateypath):
             self.reportar("Executando instalação do chocolatey")
+            with open(cmd_script_path, 'w') as file:
+                file.write(comando_cmd_script)
             self.executar(
-                '@"%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\\chocolatey\\bin"'
-            )
+                cmd_script_path
+             )
         self.executar(
             self.chocolateypath + " config set cacheLocation " + diretorioarcom
         )
