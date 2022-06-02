@@ -60,7 +60,7 @@ class Functions(Config):
             self.reportar("Executando instalação do chocolatey")
             urllib.request.urlretrieve(script_url, ps_script_path)
             self.executar(
-                'Powershell.exe -File ' + ps_script_path
+                'powershell.exe -noprofile -executionpolicy bypass -file ' + ps_script_path
              )
         self.executar(
             self.chocolateypath + " config set cacheLocation " + diretorioarcom
