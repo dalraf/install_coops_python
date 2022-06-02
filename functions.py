@@ -2,6 +2,7 @@ import subprocess
 import requests
 import os
 import logging
+import urllib.request
 from config import Config
 
 
@@ -52,24 +53,14 @@ class Functions(Config):
 
     # Executa instalacao de programas
     def installprograma(self, diretorioarcom, programa):
-        comando_cmd_script = '''
-@echo off
-
-SET DIR=%~dp0%
-
-::download install.ps1
-%systemroot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "((new-object net.webclient).DownloadFile('https://community.chocolatey.org/install.ps1','%DIR%install.ps1'))"
-::run installer
-%systemroot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& '%DIR%install.ps1' %*"
-        '''
-        cmd_script_name = 'install_chocolatey.bat'
-        cmd_script_path = diretorioarcom + '\\' + cmd_script_name
         if not os.path.isfile(self.chocolateypath):
+            script_url = 'https://community.chocolatey.org/install.ps1'
+            ps_script_name = 'install_chocolatey.ps1'
+            ps_script_path = diretorioarcom + '\\' + ps_script_name
             self.reportar("Executando instalação do chocolatey")
-            with open(cmd_script_path, 'w') as file:
-                file.write(comando_cmd_script)
+            urllib.request.urlretrieve(script_url, ps_script_path)
             self.executar(
-                cmd_script_path
+                'Powershell.exe -File ' + ps_script_path
              )
         self.executar(
             self.chocolateypath + " config set cacheLocation " + diretorioarcom
