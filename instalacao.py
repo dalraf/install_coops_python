@@ -17,7 +17,7 @@ class Caixainstall(Object_execute):
         self.java.thread_configurar()
         self.reportar("Baixando o Caixa")
         if not os.path.isfile(self.diretorioarcom + "\\Setup.jar"):
-            file_id = "1M5SFb5f6z459xNLw7COboxXpH-PrBmqq"
+            file_id = "1u0JnYuLxxcOgMTU5iYwMR20SOwBq3vaB"
             destination = self.diretorioarcom + "\\Setup.jar"
             self.download_file_from_google_drive(file_id, destination)
             self.reportar("Download finalizado")
